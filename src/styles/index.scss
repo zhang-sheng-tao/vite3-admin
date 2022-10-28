@@ -1,0 +1,70 @@
+// :export {
+//     menuText: $menuText;
+//     menuActiveText: $menuActiveText;
+//     subMenuActiveText: $subMenuActiveText;
+//     menuBg: $menuBg;
+//     menuHover: $menuHover;
+//     subMenuBg: $subMenuBg;
+//     subMenuHover: $subMenuHover;
+//     sideBarWidth: $sideBarWidth;
+// }
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#app {
+  width: 100%;
+  height: 100%;
+}
+
+a {
+    text-decoration: none;
+  }
+
+.layout {
+  .el-container {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+  .el-main {
+    padding: 0;
+  }
+  .el-scrollbar__view {
+    height: 100%;
+  }
+  .el-menu{
+    border: none;
+    background-color: transparent;
+  }
+
+  .el-menu-item:hover,
+  .el-sub-menu__title:hover {
+    background-color: #ffffff25;
+  }
+
+  // 选中menu的背景色
+  .el-menu-item.is-active{
+      background-color: #41cce252;
+  }
+  .el-menu-item.is-active::after{
+    content: '';
+    display: block;
+    width: 2px;
+    height: 80%;
+    background-color: #409eff;
+    position: absolute;
+    right: 0;
+  }
+}
+.el-icon{
+    cursor: pointer;
+}
+.el-icon:hover{
+    color: #409eff;
+}
