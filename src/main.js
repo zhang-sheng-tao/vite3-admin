@@ -1,3 +1,4 @@
+// import "@/assets/debug.js";
 import { createApp, h } from "vue";
 import { RouterView } from "vue-router";
 import store from "./store";
@@ -16,7 +17,7 @@ import "./permission";
 const app = createApp({ render: () => h(RouterView) });
 
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
-  app.component(key, component);
+	app.component(key, component);
 }
 
 app.use(store);

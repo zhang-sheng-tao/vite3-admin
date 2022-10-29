@@ -1,0 +1,5 @@
+#布局方式 true(左右布局) false(上下布局)
+VITE_ISLAYOUT = true
+
+#请求的基础url
+VITE_BASE_URL = ''

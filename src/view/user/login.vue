@@ -12,7 +12,7 @@
           <el-input show-password prefix-icon="Lock" placeholder="请输入密码" v-model.trim="userinfo.password" style="height: 50px; font-size: 18px" type="password" @keyup.enter="onSubmit" />
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" style="height: 50px; font-size: 18px; width: 100%" @click="onSubmit">登 录</el-button>
+          <el-button type="primary" :loading="loading" style="height: 50px; font-size: 18px; width: 100%" @click="onSubmit">登 录</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -45,9 +45,11 @@ const loading = ref(false);
 const formData = ref(null);
 function onSubmit() {
   if (!formData) return;
+  loading.value = true
   formData.value.validate((valid) => {
     if (valid) {
       login(userinfo).then((res) => {
+        loading.value = false
         router.replace({
           path: route.query.redirect || "/",
         });
