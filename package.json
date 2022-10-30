@@ -8,7 +8,7 @@
 		"testdev": "vite --port 3006 --mode development",
 		"build": "vite build --mode production",
 		"testbuild": "vite build --mode development",
-		"preview": "vite preview"
+		"preview": "vite preview --open"
 	},
 	"dependencies": {
 		"@element-plus/icons-vue": "^2.0.10",
@@ -24,6 +24,7 @@
 	},
 	"devDependencies": {
 		"@vitejs/plugin-vue": "^3.1.0",
+		"terser": "^5.15.1",
 		"unplugin-auto-import": "^0.11.2",
 		"unplugin-vue-components": "^0.22.8",
 		"vite": "^3.1.0",

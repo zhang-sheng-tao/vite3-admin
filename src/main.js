@@ -11,6 +11,8 @@ import * as ElementPlusIconsVue from "@element-plus/icons-vue"; //引入icons图
 // 引入自己的样式
 import "@/styles/index.scss";
 
+console.log(123456);
+
 // 引入权限
 import "./permission";
 
