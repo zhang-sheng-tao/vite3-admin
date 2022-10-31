@@ -2,7 +2,9 @@
   <el-header class="elheader flex">
     <div class="left flex" :style="{ 'padding-left': !isLayout ? '0px' : '10px' }">
       <Logo v-show="!isLayout" />
-      <el-icon :style="{ 'padding-left': isLayout ? '0px' : '10px' }" @click="isCollapse = !isCollapse"><Expand /></el-icon>
+      <el-icon :style="{ 'padding-left': isLayout ? '0px' : '10px' }" @click="isCollapse = !isCollapse">
+        <Expand />
+      </el-icon>
       <el-breadcrumb separator="/" style="margin-left: 10px">
         <template v-for="item in breadcrumb" :key="item.path">
           <el-breadcrumb-item v-if="item.meta.title">
@@ -12,9 +14,12 @@
       </el-breadcrumb>
     </div>
     <div class="right flex">
-      <el-autocomplete v-model.trim="searchMenu" clearable :fetch-suggestions="querySearch" placeholder="请输入页面名称" @select="handleSelect" />
+      <el-autocomplete v-model.trim="searchMenu" clearable :fetch-suggestions="querySearch" placeholder="请输入页面名称"
+        @select="handleSelect" />
       <el-tooltip content="刷新" placement="bottom">
-        <el-icon class="icon" @click="router.go(0)"> <Refresh /> </el-icon>
+        <el-icon class="icon" @click="router.go(0)">
+          <Refresh />
+        </el-icon>
       </el-tooltip>
       <el-dropdown style="user-select: none">
         <span class="el-dropdown-link">
@@ -22,7 +27,7 @@
         </span>
         <template #dropdown>
           <el-dropdown-menu>
-            <el-dropdown-item @click="isLayout = !isLayout">修改布局样式</el-dropdown-item>
+            <el-dropdown-item>个人中心</el-dropdown-item>
             <el-dropdown-item @click="logout">退出登录</el-dropdown-item>
             <el-dropdown-item>修改密码</el-dropdown-item>
           </el-dropdown-menu>
@@ -37,7 +42,7 @@ import Logo from "@/layout/Logo/index.vue";
 import PINIA_USERINFO from "@/store/user";
 import PINIA_LAYOUT from "@/store/layout";
 const { isCollapse, isLayout } = toRefs(PINIA_LAYOUT());
-const { MENULIST, SEARCHMENULIST, logout } = PINIA_USERINFO();
+const { SEARCHMENULIST, logout } = PINIA_USERINFO();
 const router = useRouter();
 const route = useRoute();
 const searchMenu = ref("");
@@ -77,21 +82,26 @@ function userLogout() {
   justify-content: space-between;
   padding: 0;
 }
+
 .active {
   width: 40px;
   height: 40px;
   border-radius: 5px;
 }
+
 .right {
   padding-right: 10px;
 }
+
 .flex {
   display: flex;
   align-items: center;
 }
+
 .icon {
   margin: 0 10px;
 }
+
 .breadcrumb {
   cursor: text;
   font-weight: 400;
