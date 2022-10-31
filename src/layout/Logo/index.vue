@@ -19,10 +19,14 @@ const bg = computed(() => {
 const yearMonthDay = shallowRef(new formatting().yearMonthDay("yearMonthDay"));
 const toLocaleTimeString = shallowRef(new formatting().toLocaleTimeString());
 
-setInterval(() => {
+const time = setInterval(() => {
   yearMonthDay.value = new formatting().yearMonthDay("yearMonthDay");
   toLocaleTimeString.value = new formatting().toLocaleTimeString();
 }, 1000);
+
+onBeforeMount(() => {
+  clearInterval(time);
+});
 </script>
 <style lang="scss" scoped>
 .logo {
