@@ -11,15 +11,13 @@ import * as ElementPlusIconsVue from "@element-plus/icons-vue"; //引入icons图
 // 引入自己的样式
 import "@/styles/index.scss";
 
-console.log(123456);
-
 // 引入权限
 import "./permission";
 
 const app = createApp({ render: () => h(RouterView) });
 
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
-	app.component(key, component);
+  app.component(key, component);
 }
 
 app.use(store);
