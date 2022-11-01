@@ -1,5 +1,5 @@
 <template>
-  <el-table :data="tableData">
+  <el-table :data="tableData" border>
     <el-table-column align="center" v-for="(item, index) in tableHeader" :key="index" :width="item.width || 'auto'" :label="item.label">
       <template #default="{ row, $index }">
         <template v-if="item.type === 'index'">{{ $index + 1 }}</template>

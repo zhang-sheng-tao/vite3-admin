@@ -132,7 +132,6 @@ export function floatAdd(a, b) {
   e = Math.pow(10, Math.max(c, d));
   return (accMul(a, e) + accMul(b, e)) / e;
 }
-
 // 精度乘法
 export function accMul(arg1, arg2) {
   var m = 0,

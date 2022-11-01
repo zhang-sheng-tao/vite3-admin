@@ -18,16 +18,14 @@ export default [
         name: "index",
         meta: { title: "分级目录", icon: "WalletFilled" },
         // component: RouterReplaceComp(() => import("@/view/about/index.vue")),
-        redirect: "/about/index/list",
-        children: [
-          {
-            path: "list",
-            name: "list",
-            meta: { title: "分级目录详情", icon: "Wallet" },
-            component: () => import("@/view/about/list/index.vue"),
-            // hidden: true,
-          },
-        ],
+        component: () => import("@/view/about/index.vue"),
+      },
+      {
+        path: "list",
+        name: "list",
+        meta: { title: "分级目录详情", icon: "Wallet" },
+        component: () => import("@/view/about/list/index.vue"),
+        // hidden: true,
       },
       {
         path: "dashboards",

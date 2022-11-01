@@ -11,54 +11,73 @@ import VueSetupExtend from "vite-plugin-vue-setup-extend";
 import { viteMockServe } from "vite-plugin-mock";
 
 import path from "path";
-// https://vitejs.dev/config/
+
+const libNameReg = /\/node_modules\/([^/]+)\//;
+
+const manualChunks = (id) => {
+  if (libNameReg.test(id.toString())) {
+    const libName = RegExp.$1;
+    switch (libName) {
+      case "@vue":
+      case "echarts":
+      case "@popperjs":
+      case "element-plus":
+      case "@element-plus":
+        return libName;
+      default:
+        return "vendor";
+    }
+  }
+};
+
 export default defineConfig(({ command, mode }) => {
-	//  if(mode==='build')
+  //  if(mode==='build'){}else{}
 
-	return {
-		base: "./",
-		build: {
-			minify: "terser",
-		},
-		plugins: [
-			vue(),
-			VueSetupExtend(),
-			AutoImport({
-				resolvers: [
-					ElementPlusResolver(),
-					// IconsResolver({
-					//   prefix: 'Icon',
-					// })
-				],
-				imports: ["vue", "vue-router"],
-				dts: false,
-			}),
-			Components({
-				resolvers: [
-					ElementPlusResolver(),
-					// IconsResolver({
-					//   enabledCollections: ['ep'],
-					// }),
-				],
-			}),
-			// Icons({
-			//   autoInstall: true,
-			// }),
-			viteMockServe({
-				localEnabled: command === "serve",
-				prodEnabled: command === "build",
-				// injectCode: `import { setupProdMockServer } from './mock'
-				// setupProdMockServer();`,
-			}),
-		],
-
-		resolve: {
-			alias: {
-				"@": path.resolve(__dirname, "./src"),
-			},
-		},
-		server: {
-			host: true,
-		},
-	};
+  return {
+    base: "./",
+    build: {
+      //   minify: "terser",
+      reportCompressedSize: false,
+      rollupOptions: { manualChunks },
+    },
+    plugins: [
+      vue(),
+      VueSetupExtend(),
+      AutoImport({
+        resolvers: [
+          ElementPlusResolver(),
+          // IconsResolver({
+          //   prefix: 'Icon',
+          // })
+        ],
+        imports: ["vue", "vue-router"],
+        dts: false,
+      }),
+      Components({
+        resolvers: [
+          ElementPlusResolver(),
+          // IconsResolver({
+          //   enabledCollections: ['ep'],
+          // }),
+        ],
+      }),
+      // Icons({
+      //   autoInstall: true,
+      // }),
+      viteMockServe({
+        localEnabled: command === "serve",
+        prodEnabled: command === "build",
+        // injectCode: `import { setupProdMockServer } from './mock'
+        // setupProdMockServer();`,
+      }),
+    ],
+    resolve: {
+      alias: {
+        "@": path.resolve(__dirname, "./src"),
+      },
+    },
+    server: {
+      host: true,
+    },
+  };
 });

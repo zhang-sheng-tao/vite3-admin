@@ -3,20 +3,17 @@
     <el-scrollbar class="scrollbar" :style="{ padding: meta.padding }">
       <router-view v-slot="{ Component, route }">
         <transition name="fade-transform" mode="out-in">
-          <div :key="route.path">
-            <keep-alive :include="['layout', 'about']">
-              <component :is="Component" :key="route.path" />
-            </keep-alive>
-          </div>
+          <keep-alive :include="['layout', 'about']">
+            <component :is="Component" :key="route.path" />
+          </keep-alive>
         </transition>
       </router-view>
     </el-scrollbar>
   </el-main>
 </template>
 <script setup>
-const route = useRoute()
-const { meta } = toRefs(route)
-
+const route = useRoute();
+const { meta } = toRefs(route);
 </script>
 <style lang="scss" scoped>
 .elmain {

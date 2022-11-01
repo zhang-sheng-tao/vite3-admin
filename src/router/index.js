@@ -52,20 +52,21 @@ export const routes = [
         meta: { title: "指令学习", icon: "Wallet" },
         component: () => import("@/view/user/index.vue"),
       },
+      {
+        path: "echart",
+        name: "echart",
+        meta: { title: "echart图表库", icon: "PriceTag" },
+        component: () => import("@/view/echarts/index.vue"),
+      },
     ],
   },
   {
     path: "/link",
     name: "link",
     component: layout,
-    // alwaysShow: true,
+    alwaysShow: true,
     meta: { title: "外部链接", icon: "Link" },
     children: [
-      {
-        path: "https://www.baidu.com",
-        meta: { title: "百度", icon: "Link" },
-        hidden: true,
-      },
       {
         path: "https://www.baidu.com",
         meta: { title: "百度", icon: "Link" },
