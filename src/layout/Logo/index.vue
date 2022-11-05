@@ -1,5 +1,6 @@
 <template>
-  <div class="logo" :style="{ width: isCollapse && isLayout ? '60px' : menuWidth, padding: !isCollapse ? '0 20px' : '0px' }">
+  <div class="logo"
+    :style="{ width: isCollapse && isLayout ? '60px' : menuWidth, padding: !isCollapse ? '0 20px' : '0px' }">
     <template v-if="isCollapse && isLayout">
       <div class="calendar">27<span class="font12">/10</span></div>
     </template>
@@ -19,14 +20,14 @@ const bg = computed(() => {
 const yearMonthDay = shallowRef(new formatting().yearMonthDay("yearMonthDay"));
 const toLocaleTimeString = shallowRef(new formatting().toLocaleTimeString());
 
-const time = setInterval(() => {
-  yearMonthDay.value = new formatting().yearMonthDay("yearMonthDay");
-  toLocaleTimeString.value = new formatting().toLocaleTimeString();
-}, 1000);
+// const time = setInterval(() => {
+//   yearMonthDay.value = new formatting().yearMonthDay("yearMonthDay");
+//   toLocaleTimeString.value = new formatting().toLocaleTimeString();
+// }, 1000);
 
-onBeforeMount(() => {
-  clearInterval(time);
-});
+// onBeforeMount(() => {
+//   clearInterval(time);
+// });
 </script>
 <style lang="scss" scoped>
 .logo {
@@ -36,6 +37,7 @@ onBeforeMount(() => {
   box-sizing: border-box;
   cursor: pointer;
   transition: width 0.5s;
+
   .top,
   .bottom {
     overflow: hidden;
@@ -44,11 +46,13 @@ onBeforeMount(() => {
     font-weight: bold;
     text-align: center;
   }
+
   .calendar {
     text-align: center;
     line-height: 50px;
     font-size: 26px;
   }
+
   .font12 {
     font-size: 12px;
   }
