@@ -7,7 +7,7 @@ import box from '@/three/TEbasicObject'
 import light from '@/three/Tlight'
 import helper from '@/three/THelper'
 import codeBox from '@/three/TCodeModelts'
-import { framePromis, frameMaterial } from '@/three/TLoadModelts'
+import { framePromis } from '@/three/TLoadModelts'
 // import { Mesh } from "three";
 
 const three = ref(null);
@@ -18,14 +18,7 @@ onMounted(() => {
   TE.addObject(light)
   TE.addObject(helper)
   TE.addObject(codeBox)
-  framePromis.then(group => {
-    const frame = group.children[0]
-    frame.material.dispose()
-    frame.material = frameMaterial
-
-    group.position.set(0, 30, 0);
-    group.rotateY(-(Math.PI / 180) * 90);
-
+  framePromis().then(group => {
     TE.addObject([group])
   })
 });

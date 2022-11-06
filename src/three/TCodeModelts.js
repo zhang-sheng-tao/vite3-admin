@@ -64,7 +64,9 @@ const marte = new MeshStandardMaterial({ color: "#fff", map: texturImage });
 const codeBox = new Mesh(geometry, marte);
 codeBox.position.set(-10, 8, 0);
 codeBox.rotateX((Math.PI / 180) * 90);
-codeBox.castShadow = true;
+codeBox.castShadow = true; // 开启阴影
+
+// 法线
 const helper = new VertexNormalsHelper(codeBox, 2, "red", 1);
 
 arr.push(codeBox, helper);
