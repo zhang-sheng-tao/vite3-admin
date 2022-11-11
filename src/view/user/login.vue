@@ -44,12 +44,12 @@ const rules = reactive({
 const loading = ref(false);
 const formData = ref(null);
 function onSubmit() {
-  if (!formData) return;
-  loading.value = true
+  if (!formData.value) return;
+  loading.value = true;
   formData.value.validate((valid) => {
     if (valid) {
       login(userinfo).then((res) => {
-        loading.value = false
+        loading.value = false;
         router.replace({
           path: route.query.redirect || "/",
         });

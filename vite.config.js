@@ -3,6 +3,7 @@ import vue from "@vitejs/plugin-vue";
 import AutoImport from "unplugin-auto-import/vite"; // 全局自动引入api
 import Components from "unplugin-vue-components/vite"; // 全局自动注册组件
 import { ElementPlusResolver } from "unplugin-vue-components/resolvers"; // elementui组件库
+import zhCn from "element-plus/lib/locale/lang/zh-cn";
 // import Icons from 'unplugin-icons/vite' // icon
 // import IconsResolver from 'unplugin-icons/resolver'// 自动引入图标
 
@@ -45,7 +46,7 @@ export default defineConfig(({ command, mode }) => {
       VueSetupExtend(),
       AutoImport({
         resolvers: [
-          ElementPlusResolver(),
+          ElementPlusResolver({ locale: zhCn }),
           // IconsResolver({
           //   prefix: 'Icon',
           // })
@@ -55,7 +56,7 @@ export default defineConfig(({ command, mode }) => {
       }),
       Components({
         resolvers: [
-          ElementPlusResolver(),
+          ElementPlusResolver({ locale: zhCn }),
           // IconsResolver({
           //   enabledCollections: ['ep'],
           // }),

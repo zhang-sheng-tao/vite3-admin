@@ -185,3 +185,44 @@ export function floatSub(a, b) {
   e = Math.pow(10, Math.max(c, d));
   return (accMul(a, e) - accMul(b, e)) / e;
 }
+
+// base64转为File对象
+export function getFileFromBase64(data) {
+  let _fileObj = null;
+  const dataArr = data.split(",");
+  const byteString = atob(dataArr[1]);
+  const options = {
+    type: data.split(";base64")[0].slice(5),
+    endings: "native",
+  };
+  const u8Arr = new Uint8Array(byteString.length);
+  for (let i = 0; i < byteString.length; i++) {
+    u8Arr[i] = byteString.charCodeAt(i);
+  }
+  _fileObj = new File([u8Arr], fileName, options);
+
+  return _fileObj;
+}
+
+// base64 转成blob
+export function getBlobFromBase64(data) {
+  let _blobObj = null;
+  const dataArr = data.split(",");
+  const byteString = atob(dataArr[1]);
+  var ab = new Uint8Array(byteString.length);
+  for (var i = 0; i < byteString.length; i++) {
+    ab[i] = byteString.charCodeAt(i);
+  }
+  _blobObj = new Blob([ab], { type: opType });
+  return _blobObj;
+}
+
+// File对象转为base64
+export function getBase64FromFile(file) {
+  let reader = new FileReader();
+  reader.readAsDataURL(file);
+  // 因为FileReader的操作都是异步的，所以需要在他自身的处理事件上边回调获取
+  reader.onload = () => {
+    console.log(reader.result); // base64
+  };
+}
