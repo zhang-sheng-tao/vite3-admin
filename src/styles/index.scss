@@ -61,6 +61,9 @@ a {
     position: absolute;
     right: 0;
   }
+  .el-table .el-table__cell{
+    z-index: inherit;
+  }
 }
 .el-icon{
     cursor: pointer;

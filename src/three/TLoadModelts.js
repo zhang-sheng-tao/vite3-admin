@@ -18,7 +18,7 @@ export async function framePromis() {
 		const frame = group.children[0];
 		frame.material.dispose();
 		frame.material = frameMaterial;
-		group.position.set(0, 30, -238);
+		// group.position.set(0, 30, -38);
 		group.rotateY(-(Math.PI / 180) * 90);
 
 		return Promise.resolve(group);

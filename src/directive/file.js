@@ -56,7 +56,8 @@ export function isScroll(el, binding) {
 	let isInTransition = false; // 是否在滚动中
 	const offset = 50;
 	// 鼠标按下
-	el.addEventListener(typeEventdown, Eventdown);
+	// el.addEventListener(typeEventdown, Eventdown);
+	el.onmousedown = Eventdown;
 	function Eventdown(e) {
 		if (isInTransition) return; //如果在滚动中，则中止执行
 		if (this._timer) clearTimeout(this._timer); //清除定时器

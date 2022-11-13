@@ -2,14 +2,6 @@ import menulist from "./menulist";
 
 export default [
 	{
-		path: "/api/user/logout",
-		method: "get",
-		response: {
-			code: 200,
-			data: "退出成功",
-		},
-	},
-	{
 		url: "/api/user/login",
 		method: "post",
 		async rawResponse(req, res) {
@@ -65,6 +57,14 @@ export default [
 		response: {
 			code: 200,
 			data: [{ a: 1 }, { a: 2 }, { a: 3 }, { a: 4 }, { a: 5 }, { a: 5 }, { a: 6 }, { a: 7 }],
+		},
+	},
+	{
+		url: "/api/user/logout",
+		method: "get",
+		response: {
+			code: 200,
+			data: "退出成功",
 		},
 	},
 ];

@@ -11,10 +11,10 @@ point.position.set(20, 20, 20);
 // 聚光灯
 export const spot = new SpotLight("#fff", 0.7, 500, (Math.PI / 180) * 45, 0, 0);
 // spot.position.set(-50, 30, -50);
-spot.position.set(0, 30, -50);
+spot.position.set(0, 30, 200);
 spot.castShadow = true;
 spot.target = woll;
 
-arr.push(ambientlight, spot, point);
+arr.push(ambientlight, point, spot);
 
 export default arr;

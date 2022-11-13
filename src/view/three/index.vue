@@ -7,7 +7,8 @@ import box from '@/three/TEbasicObject'
 import light from '@/three/Tlight'
 import helper from '@/three/THelper'
 import codeBox from '@/three/TCodeModelts'
-import { framePromis } from '@/three/TLoadModelts'
+// import { framePromis } from '@/three/TLoadModelts'
+import { groupPromise } from '@/three/TGroup'
 // import { Mesh } from "three";
 
 const three = ref(null);
@@ -18,7 +19,10 @@ onMounted(() => {
   TE.addObject(light)
   TE.addObject(helper)
   TE.addObject(codeBox)
-  framePromis().then(group => {
+  // framePromis().then(group => {
+  //   TE.addObject([group])
+  // })
+  groupPromise.then(group => {
     TE.addObject([group])
   })
 });

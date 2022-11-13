@@ -4,7 +4,7 @@
       <template #default="{ row, $index }">
         <template v-if="item.type === 'index'">{{ $index + 1 }}</template>
         <template v-else-if="item.type === 'img'">
-          <iamge :src="item.prop(row)" />
+          <el-image class="elimage" :hide-on-click-modal="true" fit="cover" :z-index="10" :preview-src-list="[item.prop(row)]" :src="item.prop(row)" />
         </template>
         <template v-else-if="item.type === 'switch'">
           <el-switch v-model="row.switch" :before-change="() => item.prop(row)" active-text="开" inactive-text="关" />
@@ -21,7 +21,6 @@
   <el-pagination v-model:currentPage="seacrh.currentPage4" v-model:page-size="seacrh.pageSize4" :page-sizes="[10, 20, 30, 40]" :background="true" layout="total, sizes, prev, pager, next, jumper" :total="400" @size-change="handleSizeChange" @current-change="handleCurrentChange" />
 </template>
 <script setup>
-import iamge from "./previewImage.vue";
 import { confirm, typeOf } from "@/utils/method.js";
 const { tableData, tableHeader } = defineProps({
   tableData: {
@@ -68,5 +67,9 @@ function beforeChange(row) {
 .eltag {
   cursor: pointer;
   user-select: none;
+}
+.elimage {
+  width: 50px;
+  height: 50px;
 }
 </style>

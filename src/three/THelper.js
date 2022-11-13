@@ -10,5 +10,5 @@ const pointl = new PointLightHelper(point, point.distance, point.color);
 
 const SpotLigh = new SpotLightHelper(spot, spot.color);
 
-arr.push(axeshelper, gridhelper, pointl, SpotLigh);
+arr.push(axeshelper, gridhelper);
 export default arr;

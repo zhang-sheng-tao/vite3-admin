@@ -1,8 +1,10 @@
-import { WebGLRenderer, Scene, PerspectiveCamera, MOUSE, Vector2, Raycaster } from "three";
+import { WebGLRenderer, Scene, PerspectiveCamera, MOUSE, Group } from "three";
 
 import Stats from "three/examples/jsm/libs/stats.module";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { TransformControls } from "three/examples/jsm/controls/TransformControls.js";
+import { TEventManger } from "./TEventManger";
+
 export class TEngine {
 	dom;
 	renderer;
@@ -10,6 +12,7 @@ export class TEngine {
 	camera;
 	W;
 	H;
+	eventManger;
 	constructor(dom) {
 		const H = dom.clientHeight;
 		const W = dom.clientWidth;
@@ -21,11 +24,11 @@ export class TEngine {
 		renderer.setSize(W, H);
 		const scene = new Scene();
 		const camera = new PerspectiveCamera(45, W / H, 0.1, 1000);
-		camera.position.set(0, 50, 100);
+		camera.position.set(0, 50, 200);
 		camera.lookAt(0, 0, 0);
-		const raycaster = new Raycaster(); // 射线
-		const transformcontrols = new TransformControls(camera, renderer.domElement); //变换控制器
 
+		// 变换控制器
+		const transformcontrols = new TransformControls(camera, renderer.domElement);
 		let isShow = false;
 		transformcontrols.addEventListener("mouseDown", (e) => {
 			isShow = true;
@@ -44,25 +47,35 @@ export class TEngine {
 			RIGHT: MOUSE.ROTATE,
 		};
 
-		const move = new Vector2();
-		renderer.domElement.addEventListener("mousemove", (e) => {
-			const x = e.offsetX;
-			const y = e.offsetY;
-			move.x = (x - W / 2) / (W / 2);
-			move.y = (H / 2 - y) / (H / 2);
+		const eventManger = new TEventManger({
+			dom: renderer.domElement,
+			scene,
+			camera,
+			H,
+			W,
 		});
-		renderer.domElement.addEventListener("click", (e) => {
+
+		eventManger.addEventListener("click", (event) => {
 			if (isShow) {
 				isShow = false;
 				return false;
 			}
-			raycaster.setFromCamera(move, camera);
-			scene.remove(transformcontrols);
-			const intersects = raycaster.intersectObjects(scene.children);
-			scene.add(transformcontrols);
+			const intersects = event.intersects;
 			if (intersects.length) {
 				const object = intersects[0].object;
-				transformcontrols.attach(object);
+				if (object.type == "TransformControlsPlane") {
+					transformcontrols.detach();
+					scene.remove(transformcontrols);
+				} else {
+					scene.add(transformcontrols);
+
+					console.log(object.parent instanceof Group, object.parent);
+					// 判斷父對象
+					transformcontrols.attach(object.parent instanceof Group ? object.parent : object);
+				}
+			} else {
+				transformcontrols.detach();
+				scene.remove(transformcontrols);
 			}
 		});
 
@@ -79,6 +92,7 @@ export class TEngine {
 		this.renderer = renderer;
 		this.scene = scene;
 		this.camera = camera;
+		this.eventManger = eventManger;
 		this.W = W;
 		this.H = H;
 	}
