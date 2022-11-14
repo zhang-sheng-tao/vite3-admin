@@ -24,9 +24,6 @@ function onexpose() {
   emit("someEvent", "子组件的暴露的方法传参");
 }
 
-// 触发绑定的自定义事件
-window.dispatchEvent(new Event("Testevent"));
-
 function fnSolts(fn) {
   return fn(child);
 }

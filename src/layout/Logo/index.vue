@@ -1,8 +1,9 @@
 <template>
-  <div class="logo"
-    :style="{ width: isCollapse && isLayout ? '60px' : menuWidth, padding: !isCollapse ? '0 20px' : '0px' }">
+  <div class="logo" :style="{ width: isCollapse && isLayout ? '60px' : menuWidth, padding: !isCollapse ? '0 20px' : '0px' }">
     <template v-if="isCollapse && isLayout">
-      <div class="calendar">27<span class="font12">/10</span></div>
+      <div class="calendar">
+        {{ month }}<span class="font12">/{{ day }}</span>
+      </div>
     </template>
     <template v-else>
       <div class="top">{{ yearMonthDay }}</div>
@@ -17,17 +18,31 @@ const { isCollapse, menuBg, menuWidth, isLayout } = toRefs(PINIA_LAYOUT());
 const bg = computed(() => {
   return !isLayout.value ? "#939394" : menuBg.value;
 });
-const yearMonthDay = shallowRef(new formatting().yearMonthDay("yearMonthDay"));
-const toLocaleTimeString = shallowRef(new formatting().toLocaleTimeString());
+const formattings = new formatting();
+const yearMonthDay = ref(shallowRef(formattings.yearMonthDay("yearMonthDay")));
+const toLocaleTimeString = ref(shallowRef(formattings.toLocaleTimeString()));
+const month = ref(formattings.month());
+const day = ref(formattings.day());
 
-// const time = setInterval(() => {
-//   yearMonthDay.value = new formatting().yearMonthDay("yearMonthDay");
-//   toLocaleTimeString.value = new formatting().toLocaleTimeString();
-// }, 1000);
+let timer;
+function time12() {
+  var i = 1;
+  i += 1;
+  timer = setTimeout(() => {
+    yearMonthDay.value = formattings.yearMonthDay("yearMonthDay");
+    toLocaleTimeString.value = formattings.toLocaleTimeString();
+    month.value = formattings.month();
+    day.value = formattings.day();
+    time12();
+  }, 1000);
+}
 
-// onBeforeMount(() => {
-//   clearInterval(time);
-// });
+onMounted(() => {
+  time12();
+});
+onBeforeMount(() => {
+  clearTimeout(timer);
+});
 </script>
 <style lang="scss" scoped>
 .logo {

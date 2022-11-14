@@ -13,13 +13,14 @@ import "@/styles/index.scss";
 import "./permission";
 import * as echarts from "echarts";
 import "echarts-gl";
-console.log(import.meta.env);
+
 const app = createApp({ render: () => h(RouterView) });
 app.config.globalProperties.$echarts = echarts;
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component);
 }
 
+// 添加自定义事件
 window.addEventListener(
   "Testevent",
   function (event) {

@@ -47,10 +47,8 @@ export function isScroll(el, binding) {
   const typeEventdown = ispc ? "mousedown" : "touchstart"; // 鼠标按下
   const typeEventmove = ispc ? "mousemove" : "touchmove"; // 鼠标滑动
   const typeEvenup = ispc ? "mouseup" : "touchend"; // 鼠标抬起
-
   let parentDomWH = "";
   let childrenDomWH = "";
-
   let isDown = false;
   let cur = 0; // 列表滑动位置
   let fl = 150; //弹力公式:位置*=弹力/(弹 力+位置)

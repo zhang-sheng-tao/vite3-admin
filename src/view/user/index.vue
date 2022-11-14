@@ -5,7 +5,11 @@
         <div v-for="(item, index) in list" :key="index" class="li">{{ item.a }}</div>
       </div>
     </div>
-    <el-button type="primary" size="default" v-file.img="file">上传文件</el-button>
+    <div>
+      <p><el-button type="primary" size="default" v-file.img="file">上传文件</el-button></p>
+      <p><el-button type="primary" size="default" @click="listarr">更改数组</el-button></p>
+      <p><el-button type="primary" size="default" @click="dispatchEvent">触发全局自定义事件</el-button></p>
+    </div>
     <div>
       <h1 @click="childs">父组件</h1>
       <div>自定义事件：{{ ChildView }}</div>
@@ -18,7 +22,6 @@
         </template>
       </Dire>
     </div>
-    <el-button type="primary" size="default" @click="listarr">更改数组</el-button>
   </div>
 </template>
 <script setup>
@@ -35,6 +38,7 @@ function scroll(num) {
   console.log("到底了", num);
 }
 
+// 指令语法
 const VScroll12 = {
   a: 1,
   created(el, binding, vnode, prevVnode) {
@@ -59,6 +63,11 @@ const VScroll12 = {
     console.log(" 绑定元素的父组件卸载后调用7", el, binding, VScroll12.a);
   },
 };
+
+function dispatchEvent() {
+  window.dispatchEvent(new Event("Testevent"));
+  console.log(import.meta.env);
+}
 
 function file(file) {
   console.log(file);
