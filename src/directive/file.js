@@ -164,7 +164,7 @@ export function isScroll(el, binding) {
           if (typeOf(binding.value) === "Function") binding.value(1);
           return;
         }
-        // 快速
+        // 快速滑动时触发
         if (Math.abs(vy) < 1) {
           // 如果力度减小到小于1了,再做超出回弹
           clearInterval(this._timer);
