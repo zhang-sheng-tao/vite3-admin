@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div class="ul" v-scroll.y="file">
+    <div class="ul" v-scroll.y="scroll">
       <div style="width: 100%">
-        <div class="li" v-for="(item, index) in 30" :key="index">{{ item }}</div>
+        <div class="li" v-for="(item, index) in 8" :key="index">{{ item }}</div>
       </div>
     </div>
   </div>
@@ -12,6 +12,10 @@ import { floatAdd } from "../../utils/method.js";
 
 function testV(file) {
   console.log("到地里", file);
+}
+
+function scroll(num) {
+  console.log(num);
 }
 
 console.log(floatAdd(0.1, 0.2));

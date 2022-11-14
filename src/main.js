@@ -20,6 +20,14 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component);
 }
 
+window.addEventListener(
+  "Testevent",
+  function (event) {
+    console.log(event, "======");
+  },
+  false
+);
+
 app.use(store);
 app.use(rotuer);
 app.use(directive);

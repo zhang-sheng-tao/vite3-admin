@@ -22,31 +22,54 @@
   </div>
 </template>
 <script setup>
-import { arr } from '@/api/user'
-import Dire from "./directive.vue"
-const list = ref([])
-
-
+import { arr } from "@/api/user";
+import Dire from "./directive.vue";
+const list = ref([]);
 const ChildView = ref("");
 const Dires = ref(null);
 const model1 = ref("v-model的使用1");
 const model2 = ref("v-model的使用2");
 const soltmsg = ref("插槽传参");
 
-function scroll() {
-  console.log("到底了");
+function scroll(num) {
+  console.log("到底了", num);
 }
+
+const VScroll12 = {
+  a: 1,
+  created(el, binding, vnode, prevVnode) {
+    console.log("在绑定元素的 attribute 前或事件监听器应用前调用1", el, binding, VScroll12.a);
+  },
+  beforeMount(el, binding, vnode, prevVnode) {
+    console.log("在元素被插入到 DOM 前调用2", el, binding, VScroll12.a);
+  },
+  mounted(el, binding, vnode, prevVnode) {
+    console.log("在绑定元素的父组件及他自己的所有子节点都挂载完成后调用3", el, binding, VScroll12.a);
+  },
+  beforeUpdate(el, binding, vnode, prevVnode) {
+    console.log("绑定元素的父组件更新前调用4", el, binding, VScroll12.a);
+  },
+  updated(el, binding, vnode, prevVnode) {
+    console.log("在绑定元素的父组件及他自己的所有子节点都更新后调用5", el, binding, VScroll12.a);
+  },
+  beforeUnmount(el, binding, vnode, prevVnode) {
+    console.log("绑定元素的父组件卸载前调用6", el, binding, VScroll12.a);
+  },
+  unmounted(el, binding, vnode, prevVnode) {
+    console.log(" 绑定元素的父组件卸载后调用7", el, binding, VScroll12.a);
+  },
+};
+
 function file(file) {
   console.log(file);
 }
 
-arr().then(res => {
-  list.value = res.data
-})
+arr().then((res) => {
+  list.value = res.data;
+});
 function listarr() {
-  list.value = [...list.value, ...list.value]
+  list.value = [...list.value, ...list.value];
 }
-
 
 function someEvent(value) {
   console.log(value); // child message
