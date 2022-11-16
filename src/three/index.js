@@ -1,4 +1,4 @@
-import { WebGLRenderer, Scene, PerspectiveCamera, MOUSE, Group } from "three";
+import { WebGLRenderer, Scene, PerspectiveCamera, MOUSE, Group, Vector3 } from "three";
 
 import Stats from "three/examples/jsm/libs/stats.module";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
@@ -24,8 +24,9 @@ export class TEngine {
     renderer.setSize(W, H);
     const scene = new Scene();
     const camera = new PerspectiveCamera(45, W / H, 0.1, 1000);
-    camera.position.set(0, 50, 200);
-    camera.lookAt(0, 0, 0);
+    camera.position.set(0, 50, -5);
+    // camera.lookAt(0, 50, -45);
+    // camera.up = new Vector3(0, 50, -45)
 
     // 变换控制器
     const transformcontrols = new TransformControls(camera, renderer.domElement);
@@ -40,13 +41,16 @@ export class TEngine {
     stats.domElement.style.right = "5px";
     stats.domElement.style.left = "unset";
 
+    // 轨道控制器
     const orbitcontrols = new OrbitControls(camera, renderer.domElement);
     orbitcontrols.mouseButtons = {
       LEFT: null,
       MIDDLE: MOUSE.DOLLY,
       RIGHT: MOUSE.ROTATE,
     };
+    orbitcontrols.target = new Vector3(0, 50, -45);
 
+    // 全局事件管理器
     const eventManger = new TEventManger({
       dom: renderer.domElement,
       scene,
@@ -55,6 +59,7 @@ export class TEngine {
       W,
     });
 
+    // 全局点击事件
     eventManger.addEventListener("click", (event) => {
       if (isShow) {
         isShow = false;

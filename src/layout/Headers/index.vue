@@ -14,8 +14,7 @@
       </el-breadcrumb>
     </div>
     <div class="right flex">
-      <el-autocomplete v-model.trim="searchMenu" clearable :fetch-suggestions="querySearch" placeholder="请输入页面名称"
-        @select="handleSelect" />
+      <el-autocomplete v-model.trim="searchMenu" clearable :fetch-suggestions="querySearch" placeholder="请输入页面名称" @select="handleSelect" />
       <el-tooltip content="刷新" placement="bottom">
         <el-icon class="icon" @click="router.go(0)">
           <Refresh />

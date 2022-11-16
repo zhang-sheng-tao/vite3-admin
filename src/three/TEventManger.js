@@ -13,10 +13,14 @@ export class TEventManger extends EventDispatcher {
     const move = new Vector2();
     let newObject = null;
 
+    // 鼠标按下
     dom.addEventListener("mousedown", (event) => {
       raycaster.setFromCamera(move, camera);
       // 选中的物体
       const intersects = raycaster.intersectObjects(scene.children);
+      this.dispatchEvent({
+        type: "mousedown",
+      });
       if (intersects.length) {
         const object = intersects[0].object;
         object.dispatchEvent({
@@ -24,7 +28,7 @@ export class TEventManger extends EventDispatcher {
         });
       }
     });
-
+    // 鼠标移动
     dom.addEventListener("mousemove", (e) => {
       const x = e.offsetX;
       const y = e.offsetY;
@@ -44,7 +48,7 @@ export class TEventManger extends EventDispatcher {
         if (newObject != object) {
           if (newObject) {
             newObject.dispatchEvent({
-              type: "mouselevae",
+              type: "mouseleave",
             });
           }
           object.dispatchEvent({
@@ -59,18 +63,65 @@ export class TEventManger extends EventDispatcher {
       } else {
         if (newObject) {
           newObject.dispatchEvent({
-            type: "mouselevae",
+            type: "mouseleave",
           });
         }
         newObject = null;
       }
     });
-
+    // 鼠标抬起
+    dom.addEventListener("mouseup", (event) => {
+      raycaster.setFromCamera(move, camera);
+      // 选中的物体
+      const intersects = raycaster.intersectObjects(scene.children);
+      this.dispatchEvent({
+        type: "mouseup",
+        intersects,
+      });
+      if (intersects.length) {
+        const object = intersects[0].object;
+        object.dispatchEvent({
+          type: "mouseup",
+        });
+      }
+    });
+    // 鼠标移入(不会触发事件的冒泡)
+    dom.addEventListener("mouseenter", (event) => {
+      raycaster.setFromCamera(move, camera);
+      // 选中的物体
+      const intersects = raycaster.intersectObjects(scene.children);
+      this.dispatchEvent({
+        type: "mouseenter",
+        intersects,
+      });
+      if (intersects.length) {
+        const object = intersects[0].object;
+        object.dispatchEvent({
+          type: "mouseenter",
+        });
+      }
+    });
+    // 鼠标移出(不会触发事件的冒泡)
+    dom.addEventListener("mouseleave", (event) => {
+      raycaster.setFromCamera(move, camera);
+      // 选中的物体
+      const intersects = raycaster.intersectObjects(scene.children);
+      this.dispatchEvent({
+        type: "mouseleave",
+        intersects,
+      });
+      if (intersects.length) {
+        const object = intersects[0].object;
+        object.dispatchEvent({
+          type: "mouseleave",
+        });
+      }
+    });
+    // 鼠标点击
     dom.addEventListener("click", (event) => {
       raycaster.setFromCamera(move, camera);
       // 选中的物体
       const intersects = raycaster.intersectObjects(scene.children);
-
       this.dispatchEvent({
         type: "click",
         intersects,
@@ -82,7 +133,6 @@ export class TEventManger extends EventDispatcher {
         });
       }
     });
-
     this.raycaster = raycaster;
     this.move = move;
   }

@@ -32,15 +32,15 @@ export class formatting {
   constructor(time) {
     if (time) this.data = time;
   }
-  //   年
+  // 年
   year() {
     return this.data.getFullYear();
   }
-  //   月
+  // 月
   month() {
     return this.data.getMonth() + 1;
   }
-  //   日
+  // 日
   day() {
     return this.data.getDate();
   }
@@ -49,15 +49,15 @@ export class formatting {
       return `${this.year()}年${this.month()}月${this.day()}日`;
     }
   }
-  //   小时
+  // 小时
   getHours() {
     return this.data.getHours();
   }
-  //   分钟
+  // 分钟
   getMinutes() {
     return this.data.getMinutes();
   }
-  //   秒
+  // 秒
   getSeconds() {
     return this.data.getSeconds();
   }
@@ -65,7 +65,7 @@ export class formatting {
   toLocaleTimeString() {
     return this.data.toLocaleTimeString();
   }
-  //   获取时间对象的时间戳
+  // 获取时间对象的时间戳
   getTime() {
     return this.data.getTime();
   }
@@ -184,45 +184,4 @@ export function floatSub(a, b) {
   }
   e = Math.pow(10, Math.max(c, d));
   return (accMul(a, e) - accMul(b, e)) / e;
-}
-
-// base64转为File对象
-export function getFileFromBase64(data) {
-  let _fileObj = null;
-  const dataArr = data.split(",");
-  const byteString = atob(dataArr[1]);
-  const options = {
-    type: data.split(";base64")[0].slice(5),
-    endings: "native",
-  };
-  const u8Arr = new Uint8Array(byteString.length);
-  for (let i = 0; i < byteString.length; i++) {
-    u8Arr[i] = byteString.charCodeAt(i);
-  }
-  _fileObj = new File([u8Arr], fileName, options);
-
-  return _fileObj;
-}
-
-// base64 转成blob
-export function getBlobFromBase64(data) {
-  let _blobObj = null;
-  const dataArr = data.split(",");
-  const byteString = atob(dataArr[1]);
-  var ab = new Uint8Array(byteString.length);
-  for (var i = 0; i < byteString.length; i++) {
-    ab[i] = byteString.charCodeAt(i);
-  }
-  _blobObj = new Blob([ab], { type: opType });
-  return _blobObj;
-}
-
-// File对象转为base64
-export function getBase64FromFile(file) {
-  let reader = new FileReader();
-  reader.readAsDataURL(file);
-  // 因为FileReader的操作都是异步的，所以需要在他自身的处理事件上边回调获取
-  reader.onload = () => {
-    console.log(reader.result); // base64
-  };
 }

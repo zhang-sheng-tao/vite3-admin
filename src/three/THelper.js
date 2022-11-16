@@ -14,5 +14,5 @@ pointl.raycast = () => {};
 const SpotLigh = new SpotLightHelper(spot, spot.color);
 SpotLigh.raycast = () => {};
 
-arr.push(axeshelper, gridhelper);
+arr.push(axeshelper, gridhelper, pointl, SpotLigh);
 export default arr;

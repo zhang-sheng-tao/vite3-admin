@@ -12,26 +12,16 @@ box.castShadow = true;
 
 // 墙面
 export const woll = new Mesh(new BoxGeometry(500, 100, 10), new MeshStandardMaterial({ color: "rgb(255,255,20)" }));
-woll.position.set(0, 50, -45);
+woll.position.set(0, 50, -245);
 //更新世界矩阵
 woll.updateMatrixWorld();
 
-woll.addEventListener("mouselevae", () => {
-	console.log("mouselevae");
-	woll.material.color = new Color("rgb(255,255,20)");
+woll.addEventListener("mouseleave", () => {
+  woll.material.color = new Color("rgb(255,255,20)");
 });
 
 woll.addEventListener("mouseenter", () => {
-	console.log("mouseenter");
-	woll.material.color = new Color("red");
-});
-
-woll.addEventListener("mousemove", () => {
-	console.log("mousemove");
-});
-
-woll.addEventListener("click", () => {
-	console.log("click");
+  woll.material.color = new Color("red");
 });
 
 // 立方体

@@ -23,7 +23,7 @@ onMounted(() => {
   //   TE.addObject([group])
   // })
   groupPromise.then((group) => {
-    TE.addObject([group]);
+    TE.addObject(group);
   });
 });
 </script>
