@@ -10,15 +10,39 @@
       <el-tab-pane label="颜文字" name="third">
         <p class="kaomoji" v-for="kaomo in kaomoji" :key="kaomo">{{ kaomo }}</p>
       </el-tab-pane>
+      <el-tab-pane label="iconify图标" name="iconify">
+        <p class="kaomoji">
+          <el-icon :size="30" color="red">
+            <IWiAlien />
+          </el-icon>
+          <el-icon :size="20" color="green">
+            <IBiAirplaneFill />
+          </el-icon>
+          <el-icon :size="20">
+            <IBiAlarmFill />
+          </el-icon>
+          <el-icon :size="20">
+            <IBi0Circle />
+          </el-icon>
+          <el-icon :size="20" @click="copyText">
+            <ITablerAdOff />
+          </el-icon>
+        </p>
+      </el-tab-pane>
     </el-tabs>
   </div>
 </template>
 <script setup name="emoij">
 import Emoij from "@/assets/emoji";
-const activeName = ref("first");
+
+const activeName = ref("iconify");
 const weixin = [...Emoij.weixnList];
 const emoij = [...Emoij.emojiList];
 const kaomoji = [...Emoij.kaomojiList];
+
+function copyText() {
+  navigator.clipboard.writeText("花");
+}
 
 // 优秀的复制内容到剪切板的库👉 https://clipboardjs.com/
 function copyIconTag(str) {
