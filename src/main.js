@@ -11,11 +11,13 @@ import * as ElementPlusIconsVue from "@element-plus/icons-vue"; //引入icons图
 import "@/styles/index.scss";
 // 引入权限
 import "./permission";
+
 import * as echarts from "echarts";
 import "echarts-gl";
 
 const app = createApp({ render: () => h(RouterView) });
 app.config.globalProperties.$echarts = echarts;
+
 
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component);

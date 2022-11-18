@@ -203,3 +203,19 @@ export function isScroll(el, binding) {
     }, 20);
   }
 }
+
+export const renderDom = {
+  observer: "",
+  mounted(el, binding) {
+    const observer = new ResizeObserver((mutationsList, observer) => {
+      for (const entry of mutationsList) {
+        binding.value(entry.contentRect);
+      }
+    });
+    renderDom.observer = observer;
+    observer.observe(el);
+  },
+  beforeUnmount() {
+    renderDom.observer.disconnect();
+  },
+};

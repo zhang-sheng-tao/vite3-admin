@@ -37,7 +37,7 @@ export const routes = [
       {
         path: "emoij",
         name: "emoij",
-        meta: { title: "图标", icon: "Avatar" },
+        meta: { title: "图标集", icon: "Avatar" },
         component: () => import("@/view/emoij/index.vue"),
       },
       {

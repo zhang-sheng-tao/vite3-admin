@@ -1,7 +1,7 @@
 <template>
-  <div ref="three" class="three"></div>
+  <div ref="three" v-renderDom="renderDom" id="three" class="three"></div>
 </template>
-<script setup>
+<script setup name="three">
 import { TEngine } from "@/three/index";
 import box from "@/three/TEbasicObject";
 import light from "@/three/Tlight";
@@ -12,9 +12,15 @@ import { groupPromise } from "@/three/TGroup";
 // import { Mesh } from "three";
 
 const three = ref(null);
+const TEs = ref("");
+
+function renderDom(Dom) {
+  TEs.value.renderDom(Dom.width, Dom.height);
+}
 
 onMounted(() => {
   const TE = new TEngine(three.value);
+  TEs.value = TE;
   TE.addObject(box);
   TE.addObject(light);
   TE.addObject(helper);

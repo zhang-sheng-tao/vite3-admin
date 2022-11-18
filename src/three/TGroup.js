@@ -39,7 +39,7 @@ export const groupPromise = new Promise((reslove, reject) => {
         group.scale.set(2, 2, 2);
         groupList.push(group);
       });
-      image.clear();
+
       reslove(groupList);
     })
     .catch((err) => {

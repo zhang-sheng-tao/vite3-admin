@@ -34,14 +34,13 @@
 </template>
 <script setup name="emoij">
 import Emoij from "@/assets/emoji";
-
 const activeName = ref("iconify");
 const weixin = [...Emoij.weixnList];
 const emoij = [...Emoij.emojiList];
 const kaomoji = [...Emoij.kaomojiList];
-
+let str = "ITablerAdOff";
 function copyText() {
-  navigator.clipboard.writeText("花");
+  navigator.clipboard.writeText("花123123123");
 }
 
 // 优秀的复制内容到剪切板的库👉 https://clipboardjs.com/

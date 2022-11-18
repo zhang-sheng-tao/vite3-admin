@@ -1,4 +1,4 @@
-import { Mesh, BoxGeometry, MeshStandardMaterial, Color } from "three";
+import { Mesh, BoxGeometry, MeshStandardMaterial, Color, TorusGeometry, WireframeGeometry } from "three";
 import { texturImage } from "./Timage";
 import { VertexNormalsHelper } from "three/examples/jsm/helpers/VertexNormalsHelper.js";
 
@@ -29,6 +29,12 @@ const wboxoll = new Mesh(new BoxGeometry(10, 10, 10), new MeshStandardMaterial({
 wboxoll.position.set(10, 8, 0);
 wboxoll.castShadow = true;
 
+// 立方体 案例
+const wboxolls = new Mesh(new BoxGeometry(10, 10, 10, 4, 4, 4), new MeshStandardMaterial({ color: 0x00ff00 }));
+wboxolls.position.set(0, 25, -90);
+// wboxolls.geometry.dispose();
+// wboxolls.geometry = new TorusGeometry(10, 3, 16, 100, Math.PI * 2);
+
 // 法线
 const helper = new VertexNormalsHelper(wboxoll, 2, "red", 1);
 
@@ -36,5 +42,5 @@ const helper = new VertexNormalsHelper(wboxoll, 2, "red", 1);
 export const image = new Mesh(new BoxGeometry(30, 15, 0.1), new MeshStandardMaterial({ map: texturImage }));
 // image.position.set(0, 30, -38);
 
-arr.push(box, woll, wboxoll, image, helper);
+arr.push(box, woll, wboxoll, helper, wboxolls);
 export default arr;

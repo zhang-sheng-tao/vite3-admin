@@ -21,7 +21,9 @@ export class TEngine {
       antialias: true,
     });
     renderer.shadowMap.enabled = true;
+    renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(W, H);
+
     const scene = new Scene();
     const camera = new PerspectiveCamera(45, W / H, 0.1, 1000);
     camera.position.set(0, 50, -5);
@@ -102,5 +104,11 @@ export class TEngine {
     arr.forEach((element) => {
       this.scene.add(element);
     });
+  }
+  renderDom(width, height) {
+    if (width == this.W && height == this.H) return;
+    this.camera.aspect = width / height;
+    this.camera.updateProjectionMatrix();
+    this.renderer.setSize(width, height);
   }
 }

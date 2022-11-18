@@ -73,21 +73,21 @@ export default defineConfig(({ command, mode }) => {
         // injectCode: `import { setupProdMockServer } from './mock'
         // setupProdMockServer();`,
       }),
-      importToCDN({
-        modules: [
-          {
-            name: "vue",
-            var: "Vue",
-            path: "//unpkg.com/vue@next",
-          },
-          {
-            name: "element-plus",
-            var: "ElementPlus",
-            path: "//unpkg.com/element-plus",
-            css: "//unpkg.com/element-plus/dist/index.css",
-          },
-        ],
-      }),
+      // importToCDN({
+      //   modules: [
+      //     {
+      //       name: "vue",
+      //       var: "Vue",
+      //       path: "//unpkg.com/vue@next",
+      //     },
+      //     {
+      //       name: "element-plus",
+      //       var: "ElementPlus",
+      //       path: "//unpkg.com/element-plus",
+      //       css: "//unpkg.com/element-plus/dist/index.css",
+      //     },
+      //   ],
+      // }),
       viteCompression({
         threshold: 512000,
         algorithm: "gzip",
