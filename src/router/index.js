@@ -40,12 +40,7 @@ export const routes = [
         meta: { title: "图标集", icon: "Avatar" },
         component: () => import("@/view/emoij/index.vue"),
       },
-      {
-        path: "three",
-        name: "three",
-        meta: { title: "3D学习", icon: "Wallet", padding: "0px" },
-        component: () => import("@/view/three/index.vue"),
-      },
+
       {
         path: "user",
         name: "user",
@@ -57,6 +52,32 @@ export const routes = [
         name: "echart",
         meta: { title: "echart图表库", icon: "PriceTag" },
         component: () => import("@/view/echarts/index.vue"),
+      },
+    ],
+  },
+  {
+    path: "/three",
+    meta: { title: "three3D可视化", icon: "Notebook" },
+    component: layout,
+    redirect: "/three/index",
+    children: [
+      {
+        path: "index",
+        name: "three",
+        meta: { title: "课程", icon: "Wallet", padding: "0px" },
+        component: () => import("@/view/three/index.vue"),
+      },
+      {
+        path: "dome1",
+        name: "dome1",
+        meta: { title: "随机几何体阴影材质", icon: "Wallet", padding: "0px" },
+        component: () => import("@/view/three/dome1.vue"),
+      },
+      {
+        path: "dome2",
+        name: "dome2",
+        meta: { title: "全景层次近景", icon: "Wallet", padding: "0px" },
+        component: () => import("@/view/three/dome2.vue"),
       },
     ],
   },

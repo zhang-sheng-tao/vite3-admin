@@ -204,7 +204,8 @@ export function isScroll(el, binding) {
   }
 }
 
-export const renderDom = {
+// 监听DOM的区域变化
+export const observerDom = {
   observer: "",
   mounted(el, binding) {
     const observer = new ResizeObserver((mutationsList, observer) => {
@@ -212,10 +213,10 @@ export const renderDom = {
         binding.value(entry.contentRect);
       }
     });
-    renderDom.observer = observer;
+    observerDom.observer = observer;
     observer.observe(el);
   },
   beforeUnmount() {
-    renderDom.observer.disconnect();
+    observerDom.observer.disconnect();
   },
 };

@@ -13,6 +13,7 @@ export class TEngine {
   W;
   H;
   eventManger;
+  AnimationId;
   constructor(dom) {
     const H = dom.clientHeight;
     const W = dom.clientWidth;
@@ -21,7 +22,6 @@ export class TEngine {
       antialias: true,
     });
     renderer.shadowMap.enabled = true;
-    renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(W, H);
 
     const scene = new Scene();
@@ -83,11 +83,12 @@ export class TEngine {
       }
     });
 
+    let that = this;
     function animation() {
       orbitcontrols.update();
       renderer.render(scene, camera);
       stats.update();
-      requestAnimationFrame(animation);
+      that.AnimationId = requestAnimationFrame(animation);
     }
     animation();
 

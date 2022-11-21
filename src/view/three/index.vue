@@ -1,5 +1,5 @@
 <template>
-  <div ref="three" v-renderDom="renderDom" id="three" class="three"></div>
+  <div ref="three" v-observerDom="renderDom" id="three" class="three"></div>
 </template>
 <script setup name="three">
 import { TEngine } from "@/three/index";
@@ -21,6 +21,7 @@ function renderDom(Dom) {
 onMounted(() => {
   const TE = new TEngine(three.value);
   TEs.value = TE;
+
   TE.addObject(box);
   TE.addObject(light);
   TE.addObject(helper);
@@ -31,6 +32,10 @@ onMounted(() => {
   groupPromise.then((group) => {
     TE.addObject(group);
   });
+});
+
+onBeforeUnmount(() => {
+  cancelAnimationFrame(TEs.value.AnimationId);
 });
 </script>
 <style lang="scss" scoped>
