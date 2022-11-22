@@ -17,11 +17,11 @@ woll.position.set(0, 50, -245);
 woll.updateMatrixWorld();
 
 woll.addEventListener("mouseleave", () => {
-  woll.material.color = new Color("rgb(255,255,20)");
+	woll.material.color = new Color("rgb(255,255,20)");
 });
 
 woll.addEventListener("mouseenter", () => {
-  woll.material.color = new Color("red");
+	woll.material.color = new Color("red");
 });
 
 // 立方体
