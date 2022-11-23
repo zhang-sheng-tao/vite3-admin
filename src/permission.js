@@ -20,9 +20,8 @@ router.beforeEach(async (to, from, next) => {
         next();
       } else {
         try {
-          // 用户信息
-          await info();
-          await menulist();
+          await info(); // 用户信息
+          await menulist(); // 动态路由
           next({ ...to, redirect: true });
         } catch (err) {
           // 退出登录

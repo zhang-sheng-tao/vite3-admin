@@ -4,6 +4,7 @@ import router from "@/router";
 import PINIA_USERINFO from "@/store/user";
 import { removeStorage } from "@/utils/storage";
 // const {removeRequestToken,addRequestToken,THOKEN} = PINIA_USERINFO() // 放在这里会报错 Cannot access 'PINIA_USERINFO' before initialization
+const { VITE_BASE_TOKEN } = import.meta.env;
 
 const request = axios.create({
   baseURL: "/",
@@ -46,19 +47,23 @@ function errorHandle(res) {
   switch (res.code) {
     case 401: // 401: 未登录状态，跳转登录页
       tip(res.msg);
-      removeStorage("TOKEN");
+      removeStorage(VITE_BASE_TOKEN);
       toLogin();
+      return Promise.reject(res);
       break;
     case 403: // 403 token过期 清除token并跳转登录页
       tip(res.msg);
-      removeStorage("TOKEN");
+      removeStorage(VITE_BASE_TOKEN);
+      return Promise.reject(res);
       break;
     case 404: // 404请求不存在
       tip(res.msg);
+      return Promise.reject(res);
       break;
     case 500: // 服务器报错
     case 502:
       tip("服务器报错" + res.code);
+      return Promise.reject(res);
       break;
     default:
       return Promise.reject(res);

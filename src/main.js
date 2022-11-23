@@ -18,7 +18,6 @@ import "echarts-gl";
 const app = createApp({ render: () => h(RouterView) });
 app.config.globalProperties.$echarts = echarts;
 
-
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component);
 }

@@ -15,6 +15,7 @@ onMounted(() => {
   Domes.value = Dome;
 });
 onBeforeUnmount(() => {
+  Domes.value.gui.destroy();
   cancelAnimationFrame(Domes.value.AnimationId);
 });
 </script>
