@@ -73,7 +73,9 @@ function userLogout() {
       type: "success",
       message: res.data,
     });
-    location.reload();
+    setTimeout(() => {
+      location.reload();
+    }, 500);
   });
 }
 </script>

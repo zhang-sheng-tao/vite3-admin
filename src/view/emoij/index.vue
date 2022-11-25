@@ -11,19 +11,27 @@
         <p class="kaomoji" v-for="kaomo in kaomoji" :key="kaomo">{{ kaomo }}</p>
       </el-tab-pane>
       <el-tab-pane label="iconify图标" name="iconify">
-        <p class="kaomoji">
+        <p class="icon-set emoij">
           <el-icon :size="30" color="red">
             <IWiAlien />
           </el-icon>
+        </p>
+        <p class="icon-set emoij">
           <el-icon :size="20" color="green">
             <IBiAirplaneFill />
           </el-icon>
+        </p>
+        <p class="icon-set emoij">
           <el-icon :size="20">
             <IBiAlarmFill />
           </el-icon>
+        </p>
+        <p class="icon-set emoij">
           <el-icon :size="20">
             <IBi0Circle />
           </el-icon>
+        </p>
+        <p class="icon-set emoij">
           <el-icon :size="20" @click="copyText">
             <ITablerAdOff />
           </el-icon>

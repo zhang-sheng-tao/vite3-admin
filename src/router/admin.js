@@ -15,7 +15,7 @@ export default [
     children: [
       {
         path: "index",
-        name: "index",
+        name: "about",
         meta: { title: "分级目录", icon: "WalletFilled" },
         // component: RouterReplaceComp(() => import("@/view/about/index.vue")),
         component: () => import("@/view/about/index.vue"),

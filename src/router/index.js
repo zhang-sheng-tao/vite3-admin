@@ -82,6 +82,21 @@ export const routes = [
     ],
   },
   {
+    path: "/video",
+    meta: { title: "视频直播DOME", icon: "Monitor" },
+    component: layout,
+    redirect: "/video/index",
+    // alwaysShow: true,
+    children: [
+      {
+        path: "index",
+        name: "video",
+        meta: { title: "flv直播", icon: "VideoPlay" },
+        component: () => import("@/view/video/index.vue"),
+      },
+    ],
+  },
+  {
     path: "/link",
     name: "link",
     component: layout,
