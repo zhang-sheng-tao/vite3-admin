@@ -1,4 +1,4 @@
-import { file, isScroll, observerDom } from "./file";
+import { file, isScroll, observerDom } from "./method";
 
 // 批量注册自定义指令
 export default function (app) {

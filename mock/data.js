@@ -40,7 +40,7 @@ export default [
     method: "get",
     response: ({ query }) => {
       return {
-        code: 200,
+        code: 201,
         data: menulist,
       };
     },

@@ -11,7 +11,7 @@
 </template>
 <script setup name="videos">
 import flvjs from "flv.js"; // 不兼容ios系统
-import HlsJsPlayer from "xgplayer-hls.js";
+import HlsJsPlayer from "xgplayer-hls.js"; //http://v2.h5player.bytedance.com/plugins/#xgplayer-hls
 import { IsPC } from "@/utils/method";
 
 const flv = ref(null);
@@ -56,7 +56,7 @@ function newVideo() {
 
 function destroy() {
   // 参数 isDelDom: true 删除内部DOM元素 | false 保留内部DOM元素，默认为true
-  m3u8.value.destroy(false);
+  m3u8.value.destroy(true);
 }
 
 onMounted(() => {
@@ -67,15 +67,15 @@ onMounted(() => {
   //     hasAudio: true,
   //     url: "http://live.shiankuaixian.com/live/1400557828_10011_sakx10011_main.flv",
   //   });
-  //   flvPlayer.value.attachMediaElement(flv.value);
-  //   flvPlayer.value.load();
-  //   flvPlayer.value.play();
+  //   flvPlayer.value.attachMediaElement(flv.value); 挂载元素
+  //   flvPlayer.value.load(); 加载流
+  //   flvPlayer.value.play(); 播放流
   // }
   newVideo();
 });
 
 onBeforeUnmount(() => {
-  m3u8.value.destroy(false);
+  m3u8.value.destroy(true);
 });
 </script>
 <style lang="scss" scoped>

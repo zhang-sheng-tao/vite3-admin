@@ -7,10 +7,8 @@ import directive from "./directive";
 
 import "element-plus/dist/index.css"; // 引入element-plus样式
 import * as ElementPlusIconsVue from "@element-plus/icons-vue"; //引入icons图标
-// 引入自己的样式
-import "@/styles/index.scss";
-// 引入权限
-import "./permission";
+import "@/styles/index.scss"; // 引入自己的样式
+import "./permission"; // 引入权限
 
 import * as echarts from "echarts";
 import "echarts-gl";
