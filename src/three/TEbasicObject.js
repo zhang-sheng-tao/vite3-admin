@@ -32,8 +32,6 @@ wboxoll.castShadow = true;
 // 立方体 案例
 const wboxolls = new Mesh(new BoxGeometry(10, 10, 10, 4, 4, 4), new MeshStandardMaterial({ color: 0x00ff00 }));
 wboxolls.position.set(0, 25, -90);
-// wboxolls.geometry.dispose();
-// wboxolls.geometry = new TorusGeometry(10, 3, 16, 100, Math.PI * 2);
 
 // 法线
 const helper = new VertexNormalsHelper(wboxoll, 2, "red", 1);
