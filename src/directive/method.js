@@ -63,7 +63,7 @@ export function isScroll(el, binding) {
   let isInTransition = false; // 是否在滚动中
   const offset = 50;
   // 鼠标按下
-  // el.addEventListener(typeEventdown, Eventdown); // 不能用DOM二级事件会重复绑定
+  // el.addEventListener(typeEventdown, Eventdown); // 不能用DOM二级事件,会重复绑定
   el[`on${typeEventdown}`] = Eventdown;
   function Eventdown(e) {
     if (isInTransition) return; //如果在滚动中，则中止执行

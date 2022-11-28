@@ -9,6 +9,7 @@ import VueSetupExtend from "vite-plugin-vue-setup-extend"; // 在script中写nam
 import { viteMockServe } from "vite-plugin-mock"; // 模拟数据
 import { Plugin as importToCDN } from "vite-plugin-cdn-import"; // 打包生效elementui走cdn
 import viteCompression from "vite-plugin-compression"; // 打包压缩文件
+// import ViteImages from "vite-plugin-vue-images"; // 自动引入图片
 import path from "path";
 
 const libNameReg = /\/node_modules\/([^/]+)\//;
@@ -68,6 +69,9 @@ export default defineConfig(({ command, mode }) => {
         autoInstall: true,
         compiler: "vue3",
       }),
+      // ViteImages({
+      //   dirs: ["./src/assets"],
+      // }),
       viteMockServe({
         localEnabled: command === "serve",
         prodEnabled: command === "build",
