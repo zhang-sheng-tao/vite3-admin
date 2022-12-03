@@ -34,39 +34,48 @@ export class formatting {
   }
   // 年
   year() {
+    this.data = new Date();
     return this.data.getFullYear();
   }
   // 月
   month() {
+    this.data = new Date();
     return this.data.getMonth() + 1;
   }
   // 日
   day() {
+    this.data = new Date();
     return this.data.getDate();
   }
   yearMonthDay(str) {
+    this.data = new Date();
     if (str === "yearMonthDay") {
       return `${this.year()}年${this.month()}月${this.day()}日`;
     }
   }
   // 小时
   getHours() {
+    this.data = new Date();
     return this.data.getHours();
   }
   // 分钟
   getMinutes() {
+    this.data = new Date();
     return this.data.getMinutes();
   }
   // 秒
   getSeconds() {
+    this.data = new Date();
     return this.data.getSeconds();
   }
   // 16:56:36
   toLocaleTimeString() {
+    this.data = new Date();
     return this.data.toLocaleTimeString();
   }
   // 获取时间对象的时间戳
   getTime() {
+    this.data = new Date();
     return this.data.getTime();
   }
 }

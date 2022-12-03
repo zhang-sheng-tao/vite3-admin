@@ -4,6 +4,8 @@ import * as dat from "dat.gui";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 export class dome1 {
   AnimationId;
+  camera;
+  renderer;
   constructor(dom) {
     const H = dom.clientHeight;
     const W = dom.clientWidth;
@@ -114,6 +116,7 @@ export class dome1 {
     this.scene = scene;
     this.camera = camera;
     this.renderer = renderer;
+    this.gui = gui;
   }
   renderDom(width, height) {
     if (width == this.W && height == this.H) return;

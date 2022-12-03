@@ -27,7 +27,7 @@
         <template #dropdown>
           <el-dropdown-menu>
             <el-dropdown-item>个人中心</el-dropdown-item>
-            <el-dropdown-item @click="logout">退出登录</el-dropdown-item>
+            <el-dropdown-item @click="userLogout">退出登录</el-dropdown-item>
             <el-dropdown-item>修改密码</el-dropdown-item>
           </el-dropdown-menu>
         </template>
@@ -69,7 +69,13 @@ function handleSelect({ path }) {
 
 function userLogout() {
   logout().then((res) => {
-    console.log(res);
+    ElMessage({
+      type: "success",
+      message: res.data,
+    });
+    setTimeout(() => {
+      location.reload();
+    }, 500);
   });
 }
 </script>

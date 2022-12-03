@@ -48,13 +48,18 @@ function onSubmit() {
   loading.value = true;
   formData.value.validate((valid) => {
     if (valid) {
-      login(userinfo).then((res) => {
-        loading.value = false;
-        router.replace({
-          path: route.query.redirect || "/",
+      login(userinfo)
+        .then((res) => {
+          loading.value = false;
+          router.replace({
+            path: route.query.redirect || "/",
+          });
+        })
+        .catch((err) => {
+          loading.value = false;
         });
-      });
     } else {
+      loading.value = false;
       return false;
     }
   });

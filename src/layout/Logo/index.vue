@@ -26,14 +26,11 @@ const day = ref(formattings.day());
 
 let timer;
 function time12() {
-  var i = 1;
-  i += 1;
-  timer = setTimeout(() => {
+  timer = setInterval(() => {
     yearMonthDay.value = formattings.yearMonthDay("yearMonthDay");
     toLocaleTimeString.value = formattings.toLocaleTimeString();
     month.value = formattings.month();
     day.value = formattings.day();
-    time12();
   }, 1000);
 }
 
@@ -41,7 +38,7 @@ onMounted(() => {
   time12();
 });
 onBeforeMount(() => {
-  clearTimeout(timer);
+  clearInterval(timer);
 });
 </script>
 <style lang="scss" scoped>

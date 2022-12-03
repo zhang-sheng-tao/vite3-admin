@@ -147,6 +147,7 @@ export function isScroll(el, binding) {
 			el.removeEventListener(typeEventmove, Eventmove);
 			el.removeEventListener(typeEvenup, mouseover);
 
+<<<<<<< HEAD:src/directive/file.js
 			let friction = ((vy >> 31) * 2 + 1) * 0.5; //根据力度套用公式计算出惯性大小
 			let oh = childrenDomWH - parentDomWH;
 			this._timer = setInterval(() => {
@@ -202,6 +203,63 @@ export function isScroll(el, binding) {
 			setPos(cur);
 		}, 20);
 	}
+=======
+      let friction = ((vy >> 31) * 2 + 1) * 0.5; //根据力度套用公式计算出惯性大小
+      let oh = childrenDomWH - parentDomWH;
+      this._timer = setInterval(() => {
+        vy -= friction;
+        cur += vy;
+        setPos(cur);
+        if (-cur - oh > offset) {
+          clearInterval(this._timer);
+          ease(-oh);
+          // 下拉触底 -1
+          if (typeOf(binding.value) === "Function") binding.value(scrollY ? "bottom" : "left");
+          return;
+        }
+        if (cur > offset) {
+          //如果列表顶部超出了
+          clearInterval(this._timer);
+          ease(0); //回弹
+          // 上拉触顶 1
+          if (typeOf(binding.value) === "Function") binding.value(scrollY ? "top" : "right");
+          return;
+        }
+        // 快速滑动时触发
+        if (Math.abs(vy) < 1) {
+          // 如果力度减小到小于1了,再做超出回弹
+          clearInterval(this._timer);
+          if (cur > 0) {
+            ease(0);
+            // 上拉触顶 1
+            if (typeOf(binding.value) === "Function") binding.value(scrollY ? "top" : "right");
+            return;
+          }
+          if (-cur > oh) {
+            ease(-oh);
+            // 下拉触底 -1
+            if (typeOf(binding.value) === "Function") binding.value(scrollY ? "bottom" : "left");
+            return;
+          }
+        }
+      }, 20);
+    }
+  }
+  // 快速滑动时回弹
+  function ease(target) {
+    isInTransition = true;
+    el.timer = setInterval(() => {
+      cur -= (cur - target) * 0.2;
+      if (Math.abs(cur - target) < 1) {
+        //减到 当前位置 与 目标位置相差小于1 之后直接归位
+        cur = target;
+        clearInterval(el.timer);
+        isInTransition = false;
+      }
+      setPos(cur);
+    }, 20);
+  }
+>>>>>>> d027d6a23a78c82b5e6545c94e88a6cafb035e87:src/directive/method.js
 }
 
 <<<<<<< HEAD

@@ -2,26 +2,32 @@ import { defineStore } from "pinia";
 import axios from "axios";
 import { getStorage, setStorage, removeStorage } from "@/utils/storage";
 import { login, info, logout, menulist } from "@/api/user.js";
-import admin from "@/router/admin";
+import admins from "@/router/admin";
 import router, { routes } from "@/router";
 const cancelToken = axios.CancelToken;
+const { VITE_BASE_TOKEN } = import.meta.env;
 
 export default defineStore("PINIA_USERINFO", {
   state() {
     return {
-      USERINFO: getStorage("USERINFO") || {}, // 用户信息
-      THOKEN: getStorage("THOKEN") || "", // token
+      USERINFO: "", // 用户信息
+      THOKEN: getStorage(VITE_BASE_TOKEN) || "", // token
       ROUTER: [], // 用户带有权限的完整路由
       MENULIST: [], // 要显示在左侧目录列表的路由
-      PENDING: [], // 记录每一个请求得唯一标识
       SEARCHMENULIST: [], // 搜索目录
+      PENDING: [], // 记录每一个请求得唯一标识
     };
   },
   actions: {
     async login(data) {
       const res = await login(data);
-      setStorage("THOKEN", res.data.token);
-      this.THOKEN = res.data.token;
+      if (200 <= res.data.code < 300) {
+        setStorage(VITE_BASE_TOKEN, res.data.token);
+        this.THOKEN = res.data.token;
+        return res.data;
+      } else {
+        return Promise.reject(res.data);
+      }
     },
     async info() {
       await info().then((res) => {
@@ -30,20 +36,28 @@ export default defineStore("PINIA_USERINFO", {
     },
     async logout() {
       const res = await logout();
-      //   if (res.code == 200) {
-      //     removeStorage(); time formatting
-      //   }
+      if (200 <= res.code < 300) {
+        this.THOKEN = "";
+        this.USERINFO = "";
+        this.ROUTER = [];
+        this.MENULIST = [];
+        this.SEARCHMENULIST = [];
+        removeStorage(VITE_BASE_TOKEN);
+        return res;
+      } else {
+        return Promise.reject(res);
+      }
     },
     async menulist() {
       const res = await menulist();
-      const ROUTER = concat(admin, res.data);
+      const ROUTER = concat(admins, res.data);
       ROUTER.forEach((rote) => router.addRoute(rote));
       router.addRoute({ path: "/:catchAll(.*)", redirect: "/404", hidden: true });
-      const route = routes.concat(ROUTER);
-      this.ROUTER = route;
-      const MENULIST = filterMenu(route);
+      const route = routes.concat(ROUTER); // routes(静态)； ROUTER(动态)
+      this.ROUTER = route; // 全局的完整路由
+      const MENULIST = filterMenu(route); // 显示在侧边目录路由
       this.MENULIST = MENULIST;
-      const SEARCHMENULIST = filterMenuList(MENULIST);
+      const SEARCHMENULIST = filterMenuList(MENULIST); // 搜索目录的路由
       this.SEARCHMENULIST = SEARCHMENULIST;
     },
     // 添加请求标识
@@ -99,15 +113,16 @@ function isArray(arr) {
 function isHttp(str) {
   return str.includes("http") && str.includes("://");
 }
+
 // 前后端过滤权限路由
-function concat(admin, arrs) {
+function concat(admins, arrs) {
   let arr = [];
   arrs.forEach((i) => {
-    admin.forEach((j) => {
+    admins.forEach((j) => {
       if (i.name === j.name && !i.isAuth && isArray(i.children) && isArray(j.children)) {
         j.meta = { ...j.meta, ...i.meta };
-        arr.push(j);
         j.children = concat(j.children, i.children);
+        arr.push(j);
       } else if (i.name === j.name && !i.isAuth && !isArray(i.children) && !isArray(j.children)) {
         if (j.path.startsWith("/")) j.path.replace("/", "");
         j.meta = { ...j.meta, ...i.meta };

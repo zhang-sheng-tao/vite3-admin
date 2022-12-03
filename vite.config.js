@@ -3,7 +3,6 @@ import vue from "@vitejs/plugin-vue";
 import AutoImport from "unplugin-auto-import/vite"; // 全局自动引入api
 import Components from "unplugin-vue-components/vite"; // 全局自动注册组件
 import { ElementPlusResolver } from "unplugin-vue-components/resolvers"; // elementui组件库
-import zhCn from "element-plus/lib/locale/lang/zh-cn";
 import Icons from "unplugin-icons/vite"; // icon
 import IconsResolver from "unplugin-icons/resolver"; // 自动引入图标
 import VueSetupExtend from "vite-plugin-vue-setup-extend"; // 在script中写name
@@ -20,6 +19,8 @@ const manualChunks = (id) => {
     switch (libName) {
       case "@vue":
       case "echarts":
+      case "three":
+      case "three.js":
       case "@popperjs":
       case "element-plus":
       case "@element-plus":
@@ -36,18 +37,18 @@ export default defineConfig(({ command, mode }) => {
     build: {
       //   minify: "terser",
       reportCompressedSize: false,
-      rollupOptions: { manualChunks },
+      rollupOptions: { manualChunks }, // 打包分包
     },
     plugins: [
       vue(),
-      VueSetupExtend(),
+      VueSetupExtend(), // <script  name="videos">
       AutoImport({
         resolvers: [
-          ElementPlusResolver({ locale: zhCn }),
+          ElementPlusResolver(),
           IconsResolver({
             alias: {
-              system: "system-uicons",
-              bi: "bis",
+              system: "system-uicons", // 别名
+              bi: "bis", // 别名
             },
           }),
         ],
@@ -56,9 +57,9 @@ export default defineConfig(({ command, mode }) => {
       }),
       Components({
         resolvers: [
-          ElementPlusResolver({ locale: zhCn }),
+          ElementPlusResolver(),
           IconsResolver({
-            // 自动注册https://iconify.design/组件库的名字
+            // 自动注册https://iconify.design/组件库的名字 注册图标前缀
             enabledCollections: ["ep", "bi", "wi", "ic", "tabler"],
           }),
         ],
@@ -88,6 +89,7 @@ export default defineConfig(({ command, mode }) => {
       //     },
       //   ],
       // }),
+      // 超过500k就压缩
       viteCompression({
         threshold: 512000,
         algorithm: "gzip",
