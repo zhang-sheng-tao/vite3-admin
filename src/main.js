@@ -29,6 +29,8 @@ window.addEventListener(
   false
 );
 
+console.log(app.version);
+
 app.use(store);
 app.use(rotuer);
 app.use(directive);
