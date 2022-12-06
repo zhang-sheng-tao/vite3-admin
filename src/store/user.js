@@ -16,6 +16,7 @@ export default defineStore("PINIA_USERINFO", {
       MENULIST: [], // 要显示在左侧目录列表的路由
       SEARCHMENULIST: [], // 搜索目录
       PENDING: [], // 记录每一个请求得唯一标识
+      KEEPALIVE: [], // 路由缓存
     };
   },
   actions: {
@@ -59,6 +60,17 @@ export default defineStore("PINIA_USERINFO", {
       this.MENULIST = MENULIST;
       const SEARCHMENULIST = filterMenuList(MENULIST); // 搜索目录的路由
       this.SEARCHMENULIST = SEARCHMENULIST;
+    },
+    addKeepAlive(route) {
+      const { name, meta } = route;
+      if (this.KEEPALIVE.some((item) => item === name)) {
+        this.KEEPALIVE.forEach((item, i) => {
+          this.KEEPALIVE.splice(i, 1);
+        });
+      }
+      if (meta.keepAlive) {
+        this.KEEPALIVE.push(name);
+      }
     },
     // 添加请求标识
     addRequestToken(config) {

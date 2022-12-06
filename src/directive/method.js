@@ -41,7 +41,7 @@ export function file(el, binding) {
 // 滚动行为 v-scroll.y="scroll"
 export function isScroll(el, binding) {
   el.style.userSelect = "none";
-  const { x: scrollX, y: scrollY } = binding.modifiers;
+  let { x: scrollX, y: scrollY } = binding.modifiers;
   if (!scrollX && !scrollY) {
     scrollY = true;
   }

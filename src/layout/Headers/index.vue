@@ -15,8 +15,13 @@
     </div>
     <div class="right flex">
       <el-autocomplete v-model.trim="searchMenu" clearable :fetch-suggestions="querySearch" placeholder="请输入页面名称" @select="handleSelect" />
+      <el-tooltip content="全屏" placement="bottom">
+        <el-icon class="icon" @click="toggle()">
+          <FullScreen />
+        </el-icon>
+      </el-tooltip>
       <el-tooltip content="刷新" placement="bottom">
-        <el-icon class="icon" @click="router.go(0)">
+        <el-icon style="margin-right: 10px" @click="router.go(0)">
           <Refresh />
         </el-icon>
       </el-tooltip>
@@ -40,12 +45,13 @@
 import Logo from "@/layout/Logo/index.vue";
 import PINIA_USERINFO from "@/store/user";
 import PINIA_LAYOUT from "@/store/layout";
+import fullscreen from "@/assets/screenfull";
 const { isCollapse, isLayout } = toRefs(PINIA_LAYOUT());
 const { SEARCHMENULIST, logout } = PINIA_USERINFO();
 const router = useRouter();
 const route = useRoute();
 const searchMenu = ref("");
-
+const { toggle } = fullscreen;
 const breadcrumb = computed(() => {
   return route.matched;
 });

@@ -3,7 +3,7 @@
     <el-scrollbar class="scrollbar" :style="{ padding: meta.padding }">
       <router-view v-slot="{ Component, route }">
         <transition name="fade-transform" mode="out-in">
-          <keep-alive :include="['layout', 'about']">
+          <keep-alive :include="KEEPALIVE">
             <component :is="Component" :key="route.path" />
           </keep-alive>
         </transition>
@@ -12,8 +12,14 @@
   </el-main>
 </template>
 <script setup>
+import PINIA_USERINFO from "@/store/user";
 const route = useRoute();
 const { meta } = toRefs(route);
+const { addKeepAlive, KEEPALIVE } = PINIA_USERINFO();
+
+watch(route, (val) => {
+  addKeepAlive(val);
+});
 </script>
 <style lang="scss" scoped>
 .elmain {
