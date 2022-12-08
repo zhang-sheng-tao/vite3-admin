@@ -16,14 +16,14 @@ export default [
       {
         path: "index",
         name: "about",
-        meta: { title: "分级目录", icon: "WalletFilled" },
+        meta: { title: "分级目录", keepAlive: true, icon: "WalletFilled" },
         // component: RouterReplaceComp(() => import("@/view/about/index.vue")),
         component: () => import("@/view/about/index.vue"),
       },
       {
         path: "list",
         name: "list",
-        meta: { title: "分级目录详情", icon: "Wallet" },
+        meta: { title: "分级目录详情", keepAlive: true, icon: "Wallet" },
         component: () => import("@/view/about/list/index.vue"),
         // hidden: true,
       },

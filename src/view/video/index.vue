@@ -9,7 +9,7 @@
     <!-- <video id="videojs" style="width: 300px; height: 250px"></video> -->
   </div>
 </template>
-<script setup name="videos">
+<script setup>
 import flvjs from "flv.js"; // 不兼容ios系统
 import HlsJsPlayer from "xgplayer-hls.js"; //http://v2.h5player.bytedance.com/plugins/#xgplayer-hls
 import { IsPC } from "@/utils/method";

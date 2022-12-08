@@ -20,7 +20,7 @@
     </el-card>
   </div>
 </template>
-<script setup>
+<script setup name="echarts">
 import { pie, bar3D } from "./echart.js";
 const { $echarts } = getCurrentInstance().proxy;
 const pieDom = ref(null);

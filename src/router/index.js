@@ -31,20 +31,20 @@ export const routes = [
       {
         path: "home",
         name: "home",
-        meta: { title: "首页", icon: "HomeFilled" },
+        meta: { title: "首页", keepAlive: true, icon: "HomeFilled" },
         component: () => import("@/view/home/index.vue"),
       },
       {
         path: "emoij",
         name: "emoij",
-        meta: { title: "图标集", icon: "Avatar" },
+        meta: { title: "图标集", keepAlive: true, icon: "Avatar" },
         component: () => import("@/view/emoij/index.vue"),
       },
 
       {
         path: "user",
         name: "user",
-        meta: { title: "指令学习", icon: "Wallet" },
+        meta: { title: "指令学习", keepAlive: true, icon: "Wallet" },
         component: () => import("@/view/user/index.vue"),
       },
       {
@@ -93,6 +93,12 @@ export const routes = [
         name: "video",
         meta: { title: "flv直播", icon: "VideoPlay" },
         component: () => import("@/view/video/index.vue"),
+      },
+      {
+        path: "camera",
+        name: "camera",
+        meta: { title: "推流", icon: "VideoPlay" },
+        component: () => import("@/view/video/camera.vue"),
       },
     ],
   },

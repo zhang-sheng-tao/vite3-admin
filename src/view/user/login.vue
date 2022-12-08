@@ -18,7 +18,7 @@
     </div>
   </div>
 </template>
-<script setup name="logins">
+<script setup>
 import PINIA_USERINFO from "@/store/user";
 const { login } = PINIA_USERINFO();
 const router = useRouter();

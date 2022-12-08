@@ -149,7 +149,7 @@ export function isScroll(el, binding) {
 			el.removeEventListener(typeEvenup, mouseover);
 =======
   el.style.userSelect = "none";
-  const { x: scrollX, y: scrollY } = binding.modifiers;
+  let { x: scrollX, y: scrollY } = binding.modifiers;
   if (!scrollX && !scrollY) {
     scrollY = true;
   }
