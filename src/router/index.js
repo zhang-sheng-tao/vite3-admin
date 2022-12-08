@@ -94,6 +94,12 @@ export const routes = [
         meta: { title: "flv直播", icon: "VideoPlay" },
         component: () => import("@/view/video/index.vue"),
       },
+      {
+        path: "camera",
+        name: "camera",
+        meta: { title: "推流", icon: "VideoPlay" },
+        component: () => import("@/view/video/camera.vue"),
+      },
     ],
   },
   {

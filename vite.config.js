@@ -107,6 +107,7 @@ export default defineConfig(({ command, mode }) => {
     },
     server: {
       host: true,
+      // https: true,
     },
   };
 });
