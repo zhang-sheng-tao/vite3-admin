@@ -6,7 +6,6 @@ import { TransformControls } from "three/examples/jsm/controls/TransformControls
 import { TEventManger } from "./TEventManger";
 
 export class TEngine {
-<<<<<<< HEAD
 	dom;
 	renderer;
 	scene;
@@ -14,6 +13,7 @@ export class TEngine {
 	W;
 	H;
 	eventManger;
+	AnimationId;
 	constructor(dom) {
 		const H = dom.clientHeight;
 		const W = dom.clientWidth;
@@ -22,27 +22,7 @@ export class TEngine {
 			antialias: true,
 		});
 		renderer.shadowMap.enabled = true;
-		renderer.setPixelRatio(window.devicePixelRatio);
 		renderer.setSize(W, H);
-=======
-  dom;
-  renderer;
-  scene;
-  camera;
-  W;
-  H;
-  eventManger;
-  AnimationId;
-  constructor(dom) {
-    const H = dom.clientHeight;
-    const W = dom.clientWidth;
-    this.dom = dom;
-    const renderer = new WebGLRenderer({
-      antialias: true,
-    });
-    renderer.shadowMap.enabled = true;
-    renderer.setSize(W, H);
->>>>>>> 36406dce43a538749b5642352063f455b7c16ef8
 
 		const scene = new Scene();
 		const camera = new PerspectiveCamera(45, W / H, 0.1, 1000);
@@ -103,24 +83,14 @@ export class TEngine {
 			}
 		});
 
-<<<<<<< HEAD
+		let that = this;
 		function animation() {
 			orbitcontrols.update();
 			renderer.render(scene, camera);
 			stats.update();
-			requestAnimationFrame(animation);
+			that.AnimationId = requestAnimationFrame(animation);
 		}
 		animation();
-=======
-    let that = this;
-    function animation() {
-      orbitcontrols.update();
-      renderer.render(scene, camera);
-      stats.update();
-      that.AnimationId = requestAnimationFrame(animation);
-    }
-    animation();
->>>>>>> 36406dce43a538749b5642352063f455b7c16ef8
 
 		dom.appendChild(renderer.domElement);
 		dom.appendChild(stats.domElement);

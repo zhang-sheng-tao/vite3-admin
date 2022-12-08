@@ -1,6 +1,6 @@
 <template>
   <div>
-    <video id="video"></video>
+    <video autoplay muted id="video"></video>
     <video ref="remoteVideo" id="remoteVideo"></video>
   </div>
 </template>
@@ -66,7 +66,14 @@ function getUserMedia(constraints) {
 }
 
 const constraints = {
-  audio: true,
+  audio: {
+    // volume: 0.8,
+    // sampleRate: 16000,
+    noiseSuppression: true, // 降噪
+    echoCancellation: true, // 回音消除
+
+    // channelCount: 0
+  },
   video: {
     // width: { min: 1024, ideal: 1280, max: 1920 },
     // height: { min: 721, ideal: 720, max: 1080 },
@@ -78,12 +85,13 @@ const constraints = {
 function streamFn(stream) {
   const video = document.getElementById("video");
   setTimeout(() => {
-    video.srcObject = stream;
-    video.play();
+    video.muted = false
+    // video.play();
   }, 0);
-  stream.getTracks().forEach((track) => {
-    pc.addTrack(track, stream);
-  });
+  video.srcObject = stream;
+  // stream.getTracks().forEach((track) => {
+  //   pc.addTrack(track, stream);
+  // });
 }
 
 onMounted(() => {
