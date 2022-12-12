@@ -5,8 +5,14 @@ export default defineStore("PINIA_LAYOUT", {
     return {
       isCollapse: false,
       menuBg: "#0b4577",
-      isLayout: import.meta.env.VITE_ISLAYOUT,
+      isLayout: import.meta.env.VITE_ISLAYOUT === "true",
       menuWidth: "200px",
+      innerWidth: window.innerWidth,
     };
+  },
+  actions: {
+    windowWidth() {
+      this.innerWidth = window.innerWidth;
+    },
   },
 });

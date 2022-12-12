@@ -64,6 +64,31 @@ function onSubmit() {
     }
   });
 }
+
+const windth = ref("30%");
+window.onresize = function () {
+  if (innerWidth <= 768) {
+    windth.value = "80%";
+  } else if (innerWidth <= 992) {
+    windth.value = "60%";
+  } else if (innerWidth <= 1200) {
+    windth.value = "40%";
+  } else {
+    windth.value = "30%";
+  }
+};
+
+onMounted(() => {
+  if (innerWidth <= 768) {
+    windth.value = "80%";
+  } else if (innerWidth <= 992) {
+    windth.value = "60%";
+  } else if (innerWidth <= 1200) {
+    windth.value = "40%";
+  } else {
+    windth.value = "30%";
+  }
+});
 </script>
 <style lang="scss" scoped>
 .login {
@@ -71,14 +96,15 @@ function onSubmit() {
   height: 100%;
   background: linear-gradient(89deg, #b74f4f, #1b54ef);
   .form {
-    width: 30%;
+    width: v-bind(windth);
     margin: 0 auto;
     background: #ffa400;
     padding: 15px;
     border-radius: 10px;
     position: relative;
-    top: 20%;
+    top: 25vh;
   }
+
   .title {
     color: #fff;
     font-size: 30px;

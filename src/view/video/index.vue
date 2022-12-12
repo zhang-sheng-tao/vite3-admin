@@ -25,7 +25,7 @@ function play() {
 function newVideo() {
   let u = {
     id: "m3u8",
-    url: "http://120.234.61.31:83/openUrl/usykKSQ/live.m3u8",
+    url: "http://116.77.33.230:83/openUrl/UvOUlOg/live.m3u8",
     isLive: true,
     // 在安卓端开启hls.js解析功能(有这个选项在ios端会不能播放)
     useHls: navigator.userAgent.indexOf("Android") > -1,

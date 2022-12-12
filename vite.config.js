@@ -11,6 +11,7 @@ import { Plugin as importToCDN } from "vite-plugin-cdn-import"; // 打包生效e
 import viteCompression from "vite-plugin-compression"; // 打包压缩文件
 // import ViteImages from "vite-plugin-vue-images"; // 自动引入图片
 import path from "path";
+import * as fs from "fs";
 
 const libNameReg = /\/node_modules\/([^/]+)\//;
 
@@ -107,7 +108,10 @@ export default defineConfig(({ command, mode }) => {
     },
     server: {
       host: true,
-      // https: true,
+      https: {
+        key: fs.readFileSync(`${__dirname}/localhost-key.pem`),
+        cert: fs.readFileSync(`${__dirname}/localhost.pem`),
+      },
     },
   };
 });

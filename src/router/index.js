@@ -97,8 +97,14 @@ export const routes = [
       {
         path: "camera",
         name: "camera",
-        meta: { title: "推流", icon: "VideoPlay" },
+        meta: { title: "音视频通话", icon: "VideoPlay" },
         component: () => import("@/view/video/camera.vue"),
+      },
+      {
+        path: "cameras",
+        name: "cameras",
+        meta: { title: "信令服务器音视频通话", icon: "VideoPlay" },
+        component: () => import("@/view/video/cameras.vue"),
       },
     ],
   },
