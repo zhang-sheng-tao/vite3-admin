@@ -64,7 +64,7 @@ export const routes = [
       {
         path: "index",
         name: "three",
-        meta: { title: "课程", icon: "Wallet", padding: "0px" },
+        meta: { title: "课程", icon: "Wallet", style: { padding: "0px" } },
         component: () => import("@/view/three/index.vue"),
       },
       {
@@ -103,7 +103,7 @@ export const routes = [
       {
         path: "cameras",
         name: "cameras",
-        meta: { title: "信令服务器音视频通话", icon: "VideoPlay" },
+        meta: { title: "信令服务器音视频通话", icon: "VideoPlay", style: {} },
         component: () => import("@/view/video/cameras.vue"),
       },
     ],

@@ -29,6 +29,8 @@
   </div>
 </template>
 <script setup name="camera">
+import { onBeforeUnmount } from "vue-demi";
+
 // 请求一个可用的媒体输入和输出设备的列表，例如麦克风，摄像机，耳机设备等
 navigator.mediaDevices.enumerateDevices().then((devices) => {
   let videoDevices = devices.filter((item) => item.kind === "videoinput"); // item.deviceId 设备唯一ID
@@ -85,6 +87,7 @@ const addAnswer = async () => {
 };
 
 const auth = navigator.mediaDevices.getSupportedConstraints(); // 获取浏览器支持的约束属性
+let streams = "";
 // auth中的属性就是constraints支持的属性
 const constraints = {
   audio: {
@@ -105,9 +108,14 @@ function getUserMedia() {
   navigator.mediaDevices
     .getUserMedia(constraints)
     .then((stream) => {
+      streams = stream;
       setTimeout(() => {
-        video.muted = false;
+        video.value.muted = false;
       }, 0);
+      console.log(streams);
+      console.log(streams.getTracks());
+      console.log(streams.getAudioTracks());
+      console.log(streams.getVideoTracks());
       video.value.srcObject = stream;
       stream.getTracks().forEach((track) => {
         pc.addTrack(track, stream);
@@ -132,6 +140,11 @@ function getUserMedia() {
 
 onMounted(() => {
   getUserMedia();
+});
+onBeforeUnmount(() => {
+  streams.getTracks().forEach((item) => {
+    item.stop();
+  });
 });
 </script>
 <style lang="scss" scoped>

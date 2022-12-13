@@ -1,6 +1,6 @@
 <template>
   <el-main class="elmain">
-    <el-scrollbar class="scrollbar" :style="{ padding: meta.padding }">
+    <el-scrollbar class="scrollbar" :style="{ ...meta.style }">
       <router-view v-slot="{ Component, route }">
         <transition name="fade-transform" mode="out-in">
           <keep-alive :include="KEEPALIVE">
