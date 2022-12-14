@@ -20,7 +20,7 @@
           <el-button type="primary" @click="messages">发表</el-button>
         </template>
       </el-input>
-      <el-button style="margin-top: 10px" type="danger">离开</el-button>
+      <el-button style="margin-top: 10px" @click="handleLeave" type="danger">离开</el-button>
       <el-button style="margin-top: 10px" type="primary">关闭摄像头</el-button>
     </div>
     <el-scrollbar class="list" height="100%">
@@ -50,7 +50,6 @@ const roomName = ref(""); // 用户姓名
 let socket = "";
 let streams = ""; // 本地的视频流
 let offer = "";
-const userList = ref([]);
 
 const isMy = ref(null);
 const farEnd = ref(null);
