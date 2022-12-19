@@ -7,7 +7,7 @@
       </div>
       <div class="flex">
         <el-input class="input" v-model="roomName" placeholder="请输入用户名">
-          <!-- <template #prepend> 用户名 </template> -->
+          <!-- <template #prepe nd> 用户名 </template> -->
         </el-input>
         <el-input class="input" v-model.number="roomId" placeholder="请输入房间号">
           <template #append>

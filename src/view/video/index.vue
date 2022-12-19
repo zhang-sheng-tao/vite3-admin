@@ -22,6 +22,7 @@ function play() {
   //   flvPlayer.value.play();
 }
 
+// 播放M3U8
 function newVideo() {
   let u = {
     id: "m3u8",

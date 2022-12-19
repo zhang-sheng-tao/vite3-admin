@@ -31,7 +31,7 @@ export const routes = [
       {
         path: "home",
         name: "home",
-        meta: { title: "首页", keepAlive: true, icon: "HomeFilled" },
+        meta: { title: "首页", edit: false, keepAlive: true, icon: "HomeFilled" },
         component: () => import("@/view/home/index.vue"),
       },
       {
@@ -103,8 +103,14 @@ export const routes = [
       {
         path: "cameras",
         name: "cameras",
-        meta: { title: "信令服务器音视频通话", icon: "VideoPlay", style: {} },
+        meta: { title: "信令服务器视频通话", icon: "VideoPlay", style: {} },
         component: () => import("@/view/video/cameras.vue"),
+      },
+      {
+        path: "moreCaimer",
+        name: "moreCaimer",
+        meta: { title: "多人视频通话", icon: "VideoPlay", style: {} },
+        component: () => import("@/view/video/moreCaimer.vue"),
       },
     ],
   },
