@@ -2,6 +2,7 @@
   <div class="camera">
     <video autoplay muted ref="video"></video>
     <video autoplay muted ref="remoteVideo"></video>
+    <video autoplay muted ref="remoteVideos"></video>
     <div>
       <el-input v-model="offerSdp" clearable>
         <template #prepend>本地offer</template>
@@ -29,8 +30,6 @@
   </div>
 </template>
 <script setup name="camera">
-import { onBeforeUnmount } from "vue-demi";
-
 // 请求一个可用的媒体输入和输出设备的列表，例如麦克风，摄像机，耳机设备等
 navigator.mediaDevices.enumerateDevices().then((devices) => {
   let videoDevices = devices.filter((item) => item.kind === "videoinput"); // item.deviceId 设备唯一ID
@@ -40,6 +39,7 @@ navigator.mediaDevices.enumerateDevices().then((devices) => {
 
 const pc = new RTCPeerConnection();
 const remoteVideo = ref(null);
+const remoteVideos = ref(null);
 const video = ref(null);
 
 // 创建本地SDP描述,用于描述本地的媒体流
@@ -58,6 +58,11 @@ async function createOffer() {
     }
   };
 }
+
+// 监听远端视频流
+pc.ontrack = (event) => {
+  remoteVideo.value.srcObject = event.streams[0];
+};
 
 // 创建 answer
 const offerSdp2 = ref("");
@@ -120,10 +125,6 @@ function getUserMedia() {
       stream.getTracks().forEach((track) => {
         pc.addTrack(track, stream);
       });
-      // 监听远端视频流
-      pc.ontrack = (event) => {
-        remoteVideo.value.srcObject = event.streams[0];
-      };
     })
     .catch((err) => {
       let message = "找不到摄像头";

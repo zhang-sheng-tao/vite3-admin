@@ -73,4 +73,14 @@ export default [
       data: "退出成功",
     },
   },
+  {
+    url: "/api/img",
+    method: "get",
+    rawResponse: async (req, res) => {
+      res.setHeader("Content-Type", "application/octet-stream;charset=utf-8");
+      res.setHeader("Content-Disposition", "attachment;filename=jojo.txt");
+      res.write("TEXT");
+      res.end();
+    },
+  },
 ];

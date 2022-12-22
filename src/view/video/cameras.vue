@@ -37,6 +37,7 @@
 </template>
 <script setup name="cameras">
 import io from "socket.io-client";
+import { ref } from "vue-demi";
 const pc = new RTCPeerConnection({
   iceServers: [
     {
@@ -50,6 +51,8 @@ const roomName = ref(""); // 用户姓名
 let socket = "";
 let streams = ""; // 本地的视频流
 let offer = "";
+
+const videoList = ref([]);
 
 const isMy = ref(null);
 const farEnd = ref(null);
@@ -80,11 +83,6 @@ function init() {
       stream.getTracks().forEach((track) => {
         pc.addTrack(track, stream);
       });
-      // 监听远端视频流
-      pc.ontrack = (event) => {
-        console.log(event.streams);
-        farEnd.value.srcObject = event.streams[0];
-      };
     })
     .catch((err) => {
       let message = "找不到摄像头";
@@ -145,7 +143,7 @@ function addRoom() {
       });
       return;
     }
-    createOffer();
+    createOffer(data);
   });
   // 收到offer,创建answer
   socket.on("offer", (data) => {
@@ -157,6 +155,12 @@ function addRoom() {
     addAnswer(data.sdp);
   });
 }
+
+
+// 监听远端视频流
+pc.ontrack = (event) => {
+  farEnd.value.srcObject = event.streams[0];
+};
 
 // 创建 offer
 async function createOffer() {

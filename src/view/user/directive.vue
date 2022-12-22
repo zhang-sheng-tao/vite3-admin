@@ -2,16 +2,21 @@
   <div>
     <h3>子组件</h3>
     <el-button type="primary" size="default" @click="onClick">修改v-model</el-button>
-
     <div>model1：{{ props.model1 }}</div>
     <div>model2：{{ props.model2 }}</div>
-    <div>作用域插槽的使用：<slot name="content" :child="fnSolts" /></div>
+    <div>作用域插槽的使用：<slot name="content" :child="fnSolts" />子组件的slot</div>
+    <div>inject:{{ user }}</div>
   </div>
 </template>
 <script setup>
-const props = defineProps(["model1", "model2"]);
+const props = defineProps(["model1", "model2", "isPublished", "a", "b"]); //isPublished 要检验Bollen才有效
 const emit = defineEmits(["someEvent", "update:model1", "update:model2"]);
 const child = "子组件向父组件传递的插槽参数";
+console.log(props);
+
+const user = inject("user");
+
+console.log(user, "inject");
 
 function onClick() {
   emit("someEvent", "子组件的参数");

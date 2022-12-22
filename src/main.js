@@ -33,5 +33,5 @@ window.addEventListener(
 
 app.use(store);
 app.use(rotuer);
-app.use(directive);
+app.use(directive, { test: "345242342" });
 app.mount("#app");

@@ -3,7 +3,7 @@ import { ElMessage } from "element-plus";
 import router from "@/router";
 import PINIA_USERINFO from "@/store/user";
 import { removeStorage } from "@/utils/storage";
-// const {removeRequestToken,addRequestToken,THOKEN} = PINIA_USERINFO() // 放在这里会报错 Cannot access 'PINIA_USERINFO' before initialization
+import { typeOf } from "./method";
 const { VITE_BASE_TOKEN } = import.meta.env;
 
 const request = axios.create({
@@ -27,8 +27,8 @@ request.interceptors.response.use(
     const { removeRequestToken } = PINIA_USERINFO();
     // 删除已有的请求
     removeRequestToken(response.config);
-    const res = response.data; // res.code后端返回的状态码
-    if (res.code >= 200 && res.code < 300) {
+    const res = response.data;
+    if ((res.code >= 200 && res.code < 300) || typeOf(res) === "Blob") {
       return Promise.resolve(res);
     } else {
       return errorHandle(res);
